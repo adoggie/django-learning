@@ -3,17 +3,18 @@
 django.test.Client
  	具有restful, post-file所有调用接口
 
+#基本的http请求
+    from django.test import Client
+    c = Client()
+    response = c.post('/login/', {'username': 'john', 'password': 'smith'})
+    response.status_code
+    response = c.get('/customer/details/')
+    response.content
 
-from django.test import Client
-c = Client()
-response = c.post('/login/', {'username': 'john', 'password': 'smith'})
-response.status_code
-response = c.get('/customer/details/')
-response.content
-
-c = Client()
-with open('wishlist.doc') as fp:
-   c.post('/customers/wishes/', {'name': 'fred', 'attachment': fp})
+#上传文件测试
+    c = Client()
+    with open('wishlist.doc') as fp:
+       c.post('/customers/wishes/', {'name': 'fred', 'attachment': fp})
 
 
 from django.contrib.auth.models import AnonymousUser, User
