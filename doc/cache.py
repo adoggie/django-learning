@@ -22,6 +22,19 @@ MIDDLEWARE = [
 Django的缓存系统的开源项目：https://github.com/niwibe/django-redis
 
 """
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": [
+            "redis://127.0.0.1:6379?db=1",
+            "redis://127.0.0.1:6379?db=1",
+        ],
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    },
+}
+
 
 'django.core.cache.backends.db.DatabaseCache'
 'django.core.cache.backends.dummy.DummyCache'
