@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.views.generic.base import TemplateView
 
+import Jomo
+from Jomo.views import RedisTestView
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^jomo/', include('Jomo.urls')),
+    url(r'^redis/$', RedisTestView.as_view(),name='redis_test'),
+
 ]

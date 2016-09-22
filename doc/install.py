@@ -6,6 +6,8 @@ install pip
 pip install xxx
 pip download xxxx
 
+pip install django-braces
+
 
 setuptools==17.1
 python-swiftclient

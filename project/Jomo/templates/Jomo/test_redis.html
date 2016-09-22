@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<H1>Redis Test</H1>
+{{ server_url }}
+{%   url 'redis_test' %}
+<p>
+<ul>
+    {% for userinfo in userinfo_list %}
+        <li>
+        <span>{{ userinfo.wecha_id }}
+            </span>
+        <span>
+            {{ userinfo.wechaname }}
+        </span>
+        <span>
+            {{ userinfo.tel }}
+        </span>
+        </li>
+    {% endfor %}
+</ul>
+</p>
+</body>
+</html>
