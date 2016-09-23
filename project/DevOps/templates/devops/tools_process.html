@@ -1,0 +1,19 @@
+
+{% extends "devops/tool_base.html" %}
+
+{% block content %}
+
+<p>
+<form method="post">
+    <input type="submit" value="确认">
+    {% csrf_token %}
+    {{   form.as_p }}
+</form>
+
+<textarea class="output-text"  cols="200"  rows="10">
+    {{ form.result }}
+</textarea>
+
+{% endblock %}
+
+

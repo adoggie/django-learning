@@ -23,10 +23,12 @@ urlpatterns = [
     url(r'^$', views.ToolsListView.as_view(),name='tools'),
     url(r'^urlencode/$', views.UrlEncodeView.as_view(),name='tool-urlencode'),
     url(r'^myip/$', views.my_ip,name='tool-myip'),
-    # url(r'^base64/$', RedisTestView.as_view(),name='redis_test'),
-    # url(r'^md5/$', RedisTestView.as_view(),name='redis_test'),
-    # url(r'^rainbow/$', RedisTestView.as_view(),name='redis_test'),
-    # url(r'^randpassword/$', RedisTestView.as_view(),name='redis_test'),
+    url(r'^base64/$', views.Base64View.as_view(),name='tool-base64'),
+    url(r'^hash/$', views.Md5EncodeView.as_view(),name='tool-hash'),
+    url(r'^trim/$', views.Md5EncodeView.as_view(),name='tool-hash'),
+    url(r'^time/$', views.Md5EncodeView.as_view(),name='tool-time'),
+
+
     # url(r'^uuid/$', RedisTestView.as_view(),name='redis_test'),
     # url(r'^verify_image/$', RedisTestView.as_view(),name='redis_test'),
     # url(r'^map2gps/$', RedisTestView.as_view(),name='redis_test'),
