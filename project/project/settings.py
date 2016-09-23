@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Jomo'
+    'Jomo',
+    'DevOps'
 ]
 
 MIDDLEWARE = [
@@ -59,6 +60,7 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'Jomo/templates'),
+            os.path.join(BASE_DIR, 'DevOps/templates'),
                  ]
         ,
         'APP_DIRS': True,

@@ -4,4 +4,4 @@ from django.apps import AppConfig
 
 
 class JomoConfig(AppConfig):
-    name = 'Jomo'
+    name = 'devops'

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<H1>Tools Collection</H1>
+<p>
+<ul>
+    {% for app in object_list %}
+        <li>
+        <span>
+            <a target="_blank" href="{% url app.url %}">
+            {{ app.name }}
+            </a>
+            </span>
+        <span>
+            {{ app.comment }}
+        </span>
+
+        </li>
+    {% endfor %}
+</ul>
+</p>
+</body>
+</html>
