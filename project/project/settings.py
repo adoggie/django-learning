@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'registration',
+    'registration_defaults',
     'Jomo',
     'DevOps'
 ]
@@ -61,6 +63,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'Jomo/templates'),
             os.path.join(BASE_DIR, 'DevOps/templates'),
+            os.path.join(BASE_DIR, 'registration_defaults/templates'),
                  ]
         ,
         'APP_DIRS': True,
@@ -143,3 +146,5 @@ CACHES = {
 from django.core.cache import cache
 # from django_redis.client.DefaultClient
 # from django_redis.cache.RedisCache
+
+ACCOUNT_ACTIVATION_DAYS = 2
