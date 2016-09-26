@@ -15,3 +15,4 @@ class RedisTestView(TemplateView):
 		# ctx['userinfo_list'] = PigcmsUserinfo.objects.all()
 		
 		return ctx
+

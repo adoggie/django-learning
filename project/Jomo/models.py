@@ -50,3 +50,8 @@ class PigcmsUserinfo(models.Model):
     class Meta:
         managed = False
         db_table = 'pigcms_userinfo'
+
+
+class Test(models.Model):
+    name = models.CharField(max_length=20)
+    length = models.IntegerField()

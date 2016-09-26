@@ -19,8 +19,11 @@ from django.views.generic.base import TemplateView
 
 import Jomo
 from Jomo.views import RedisTestView
+from Jomo import rest_views
 
 urlpatterns = [
     url(r'^redis/$', RedisTestView.as_view(),name='redis_test'),
+    url(r'^rest/test/$', rest_views.TestView.as_view(),name='rest_test'),
+    url(r'^rest/test2/$', rest_views.TestUserView.as_view(),name='rest_test2'),
 
 ]

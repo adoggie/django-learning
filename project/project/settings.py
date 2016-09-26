@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'registration',
     'registration_defaults',
     'Jomo',
-    'DevOps'
+    'DevOps',
+    'rest_framework',
+    # 'rest_framework.authentication.SessionAuthentication'
 ]
 
 MIDDLEWARE = [
@@ -148,3 +150,14 @@ from django.core.cache import cache
 # from django_redis.cache.RedisCache
 
 ACCOUNT_ACTIVATION_DAYS = 2
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        # 'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+    )
+}
