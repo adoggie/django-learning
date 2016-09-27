@@ -17,5 +17,6 @@ overrides:
 
 to_representation : 格式化 对象的输出
 
+默认 的 ModelSerializer的子类，定义Meta.model之后，ListAPIView会自动调用 每一行的 to_representation()方法，将行记录每个字段值取出，每一行就是一个  dict 对象
 
 """

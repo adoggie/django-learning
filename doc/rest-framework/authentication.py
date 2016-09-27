@@ -57,12 +57,18 @@ class ExampleView(APIView):
 """
 
 """
-
 @api_view(['GET'])
 @authentication_classes((SessionAuthentication, BasicAuthentication))
 @permission_classes((IsAuthenticated,))
 def example_view(request, format=None):
-	...
+
+"""
+
+"""
+注意：
+    配置了认证类之后，request到达，APIView在initial阶段进行身份认证，如果用户未登录，则reqeust.user为Anomymouse用户类型，其并不会返回HTTP错误
+
+	所以需要编写MiddleWare在项目中控制 访问Api必须被授权才能访问，拦截掉所有请求，直接返回自定义的错误码信息 { status=0,errcode=xxx }
 
 """
 
