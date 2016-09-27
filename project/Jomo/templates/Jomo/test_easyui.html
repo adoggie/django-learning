@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:9900/static/js/jeasyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:9900/static/js/jeasyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:9900/static/js/jeasyui/demo.css">
+    <script type="application/javascript" src="http://127.0.0.1:9900/static/js/jeasyui/jquery.min.js"></script>
+    <script type="application/javascript" src="http://127.0.0.1:9900/static/js/jeasyui/jquery.easyui.min.js"></script>
+
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'js/jeasyui/themes/default/easyui.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'js/jeasyui/themes/icon.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'js/jeasyui/demo.css' %}">
+    <script type="application/javascript" src="{% static 'js/jeasyui/jquery.min.js'%}"></script>
+    <script type="application/javascript" src="{% static 'js/jeasyui/jquery.easyui.min.js'%}"></script>
+
+</head>
+<body>
+<a id="button1" class="easyui-linkbutton">get count</a>
+<ul id="list" class="easyui-datalist" title="Basic DataList" style="width:400px;height:250px"
+    checkbox="true" selectoncheck="false"
+
+    >
+    <li value="AL">Alabama</li>
+    <li value="AK">Alaska</li>
+    <li value="AZ">Arizona</li>
+    <li value="AR">Arkansas</li>
+    <li value="CA">California</li>
+</ul>
+
+<script>
+    $(document).ready(function () {
+        $('#list').datalist({
+            onClickRow: function (index,row) {
+                console.log(row.text);
+
+            }
+        });
+        $('#button1').linkbutton({
+            onClick: function () {
+                var data = $('#list').datalist('getChecked');
+                data.map(
+                        function(_){
+                            console.log( JSON.stringify(_) );
+                        });
+//                console.log(data);
+                $.messager.show({
+                    title:'test',
+                    msg:'messager pop',
+                    showType:'show'
+                });
+            }
+        });
+
+    });
+
+</script>
+
+
+
+</body>
+</html>
