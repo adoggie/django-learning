@@ -56,6 +56,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+MIDDLEWARE_CLASSES =[
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+
 ROOT_URLCONF = 'project.urls'
 
 TEMPLATES = [
@@ -170,3 +175,26 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     )
 }
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_METHODS = (
+	'GET',
+	'POST',
+	'PUT',
+	'PATCH',
+	'DELETE',
+	'OPTIONS'
+)
+CORS_ALLOW_CREDENTIALS = False
+CORS_ALLOW_HEADERS = (
+	'x-requested-with',
+	'content-type',
+	'accept',
+	'origin',
+	'authorization',
+	'x-csrftoken',
+	'if-version',
+	'session-token',
+	'token'
+)
+

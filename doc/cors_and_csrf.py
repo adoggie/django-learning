@@ -18,3 +18,35 @@ CORS还可以返回客户机http请求header中可以包含哪些字段
 
 
 """
+
+""""
+pip install djang-cors-headers
+"""
+
+MIDDLEWARE_CLASSES = (
+	'corsheaders.middleware.CorsMiddleware',
+)
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_METHODS = (
+	'GET',
+	'POST',
+	'PUT',
+	'PATCH',
+	'DELETE',
+	'OPTIONS'
+)
+CORS_ALLOW_CREDENTIALS = False
+CORS_ALLOW_HEADERS = (
+	'x-requested-with',
+	'content-type',
+	'accept',
+	'origin',
+	'authorization',
+	'x-csrftoken',
+	'if-version',
+	'session-token',
+	'token'
+)
+
+
