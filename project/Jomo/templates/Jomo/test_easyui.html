@@ -1,4 +1,4 @@
-{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,12 +12,12 @@
     <script type="application/javascript" src="http://127.0.0.1:9900/static/js/jeasyui/jquery.easyui.min.js"></script>
 
 
-
-    <link rel="stylesheet" type="text/css" href="{% static 'js/jeasyui/themes/default/easyui.css'%}">
-    <link rel="stylesheet" type="text/css" href="{% static 'js/jeasyui/themes/icon.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'js/jeasyui/demo.css' %}">
-    <script type="application/javascript" src="{% static 'js/jeasyui/jquery.min.js'%}"></script>
-    <script type="application/javascript" src="{% static 'js/jeasyui/jquery.easyui.min.js'%}"></script>
+    <!--{% load static %}-->
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'js/jeasyui/themes/default/easyui.css'%}">-->
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'js/jeasyui/themes/icon.css' %}">-->
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'js/jeasyui/demo.css' %}">-->
+    <!--<script type="application/javascript" src="{% static 'js/jeasyui/jquery.min.js'%}"></script>-->
+    <!--<script type="application/javascript" src="{% static 'js/jeasyui/jquery.easyui.min.js'%}"></script>-->
 
 </head>
 <body>
@@ -32,6 +32,29 @@
     <li value="AR">Arkansas</li>
     <li value="CA">California</li>
 </ul>
+
+
+<div id="tb" style="padding:5px;height:auto">
+    <div style="margin-bottom:5px">
+        <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"></a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true"></a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true"></a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-cut" plain="true"></a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"></a>
+    </div>
+    <div>
+        Date From: <input class="easyui-datebox" style="width:80px">
+        To: <input class="easyui-datebox" style="width:80px">
+        Language:
+        <input class="easyui-combobox" style="width:100px"
+               url="data/combobox_data.json"
+               valueField="id" textField="text">
+        <a href="#" class="easyui-linkbutton" iconCls="icon-search">Search</a>
+    </div>
+</div>
+
+
+
 
 <script>
     $(document).ready(function () {

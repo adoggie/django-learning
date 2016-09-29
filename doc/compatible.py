@@ -2,7 +2,7 @@
 
 """
 
-django1.10 版本与诸多第三方组件不兼容
+django1.10 版本与诸多第三方组件不兼容  请考虑1.9.10，兼容老款MiddleWare
 
 	django-cors-headers  X
 

@@ -9,7 +9,8 @@ from django.http.response import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
-from django.views.generic.edit import FormView
+from django.views.generic.base import RedirectView
+from django.views.generic.edit import FormView, DeleteView
 from django.views.generic.list import ListView
 
 

@@ -13,8 +13,10 @@ from Jomo.models import Test,PigcmsUserinfo
 from rest_framework_xml.renderers import XMLRenderer
 
 class SerializerSimpleList(Serializer):
-	def to_representation(self, instance):
-		return {'index':instance}
+	pass
+
+	# def to_representation(self, instance):
+	# 	return {'index':instance}
 
 class TestListView( ListAPIView ):
 	# renderer_classes = (JSONRenderer,)
@@ -25,6 +27,8 @@ class TestListView( ListAPIView ):
 		for _ in range(100):
 			data.append({'index': _ + 1, 'name': get_random_string(20)})
 		return data
+
+
 
 
 class SerializerDBTable(ModelSerializer):
