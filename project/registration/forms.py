@@ -1,3 +1,5 @@
+#coding:utf-8
+
 """
 Forms and validation code for user registration.
 
@@ -84,6 +86,23 @@ class RegistrationForm(UserCreationForm):
             except ValidationError as v:
                 self.add_error(User.USERNAME_FIELD, v)
         super(RegistrationForm, self).clean()
+
+
+    def clean_password2(self):
+        """
+        上层类clean_password2()进行密码验证，通过重载则接收任意的密码格式
+        :return:
+        """
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError(
+                self.error_messages['password_mismatch'],
+                code='password_mismatch',
+            )
+        self.instance.username = self.cleaned_data.get('username')
+        # password_validation.validate_password(self.cleaned_data.get('password2'), self.instance)
+        return password2
 
 
 class RegistrationFormTermsOfService(RegistrationForm):

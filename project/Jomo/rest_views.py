@@ -35,8 +35,8 @@ class SerializerDBTable(ModelSerializer):
 
 	class Meta:
 		model = PigcmsUserinfo
-		fields = '__all__'
-		# fields = ('we','length')
+		# fields = '__all__'
+		fields = ('wecha_id','wechaname','tel')
 
 	"""
 	按需定制输出
@@ -49,28 +49,41 @@ class SerializerDBTable(ModelSerializer):
 	"""
 
 #自定义分页大小
-class MyPagination(PageNumberPagination):
-	page_size = 10
+class EasyUiPagination(PageNumberPagination):
+	# page_size = 10  # 真正的page_size由easyui.paginator传递过来
+	page_query_param = 'page'
+	page_size_query_param ='rows'
+
+	def get_paginated_response(self,data):
+		return Response(
+				{'total':self.page.paginator.count,
+				 'rows':data
+				 })
+
 
 class TestDBTableView(ListAPIView):
-	queryset = PigcmsUserinfo.objects
+	queryset = PigcmsUserinfo.objects.all()
 	serializer_class =  SerializerDBTable
 	renderer_classes = (JSONRenderer,)
-	pagination_class = MyPagination
-	# authentication_classes = (SessionAuthentication
-	def filter_queryset(self, queryset):
-		return  queryset.all()[:200]
+	pagination_class = EasyUiPagination
 
-	def get(self,request,*args,**kwargs):
+	# authentication_classes = (SessionAuthentication
+
+	# def filter_queryset(self, queryset):
+	# 	return  queryset.all()[:200]
+
+
+	def _get(self,request,*args,**kwargs):
 		"""
 		自己重写get() ,以上定义的Name些 xxx_class全部失效，完全自己处理数据返回
 		自定义的 {status,errcode,errmsg,result} 就在这里自行添加了
 		所以基本上从APIView继承就可以了,如果需要分页处理，看看ListViewAPI
 		"""
-		if  request.user.is_authenticated:
-			return Response({'status':0})  #这里直接拒绝掉了
+		# if  request.user.is_authenticated:
+		# 	return Response({'status':0})  #这里直接拒绝掉了
 		ser = SerializerDBTable( self.get_queryset(),many=True)
 		data = ser.data
+		return Response(data)
 
 		#手动控制分页
 		page = PageNumberPagination()

@@ -24,7 +24,7 @@ from Jomo import rest_views
 urlpatterns = [
     url(r'^redis/$', RedisTestView.as_view(),name='redis_test'),
     url(r'^rest/test/$', rest_views.TestListView.as_view(),name='rest_test'),
-    url(r'^rest/test2/$', rest_views.TestDBTableView.as_view(),name='rest_test2'),
+    url(r'^rest/wxusers/$', rest_views.TestDBTableView.as_view(),name='rest_test2'),
     url(r'^easyui/test/$',TemplateView.as_view(template_name='Jomo/test_easyui.html'),name='easyui')
 
 ]

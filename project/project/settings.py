@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'Jomo',
     'DevOps',
     'rest_framework',
+    'webapi',
     # 'rest_framework.authentication.SessionAuthentication'
 ]
 
@@ -57,7 +58,14 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-_MIDDLEWARE_CLASSES =[
+MIDDLEWARE_CLASSES =[
+        'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 ]
 
@@ -72,6 +80,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'Jomo/templates'),
             os.path.join(BASE_DIR, 'DevOps/templates'),
             os.path.join(BASE_DIR, 'registration_defaults/templates'),
+            os.path.join(BASE_DIR, 'webapi/templates'),
                  ]
         ,
         'APP_DIRS': True,
@@ -199,3 +208,4 @@ CORS_ALLOW_HEADERS = (
 	'token'
 )
 
+LOGIN_REDIRECT_URL='/t'

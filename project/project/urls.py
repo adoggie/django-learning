@@ -23,9 +23,12 @@ from django.views.static import serve
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
     url(r'^jomo/', include('Jomo.urls')),
-    # url(r'^t/', include('DevOps.urls')),
+    url(r'^t/', include('DevOps.urls')),
     # url(r'^user/', include('django.contrib.auth.urls')),
+
     # url(r'^accounts/', include('registration.urls')),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^webapi/',include('webapi.urls')),
     # url(r'^api-auth/', include('rest_framework.urls',namespace='rest_framework')),
     # url(r'^static/(?P<path>.*)$',serve,{'document_root':settings.STATIC_ROOT,'show_indexes':True}, name='static'),
     url(r'^static/(?P<path>.*)$',serve,{'document_root':settings.STATIC_ROOT,'show_indexes':True}),

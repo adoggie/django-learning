@@ -46,6 +46,11 @@ class ApiDoc(models.Model):
 	url = models.CharField(max_length= 200)
 	method = models.CharField(max_length=20,default=GET,choices=CHOICE_METHOD)
 	comment = models.TextField(null=True)
+	req_headers = models.CharField(max_length=2000,null=True)
+	req_paramters = models.CharField(max_length=2000,null=True)
+	resp_headers = models.CharField(max_length=2000,null=True)
+	resp_data =  models.CharField(max_length=2000,null=True)
+
 
 UTF8 = 'utf-8'
 CHOICE_CHAR_ENCODING =(
@@ -64,42 +69,8 @@ CHOICE_CONTENT_TYPE=(
 	(CONTENT_TYPE_YAML,CONTENT_TYPE_YAML)
 )
 
-
-class Body(models.Model):
-	doc =  models.ForeignKey(ApiDoc)
-	type = models.IntegerField(default= ApiDoc.REQUEST)
-	char_encoding = models.CharField(max_length=40,choices=CHOICE_CHAR_ENCODING,default=UTF8)
-	content_type = models.CharField(max_length=60,choices=CHOICE_CONTENT_TYPE,default=CONTENT_TYPE_X_FORM)
-	header = models.ForeignKey(ParamerSet)
-	data = models.ForeignKey(ParamerSet)
-
-class ParamerSet(models.Model):
-	name = models.CharField(max_length=40,db_index=True)
-
-class Parameter(models.Model):
-	"""
-	支持嵌套
-	"""
-	INT = 'int'
-	STRING = 'string'
-	BOOL = 'bool'
-	CHOICE_VALUE_TYPE=(
-		(INT,INT),
-		(STRING,STRING),
-		(BOOL,BOOL)
-	)
-	owner = models.ForeignKey(ParamerSet,related_name='parameter_set')
-	name = models.CharField(max_length=40)
-	description = models.CharField(max_length=200,null=True)
-	value_type = models.CharField(max_length=40,choices=CHOICE_VALUE_TYPE,default=STRING)
-	optional = models.BooleanField()                            #是否可选
-	default_value = models.CharField(max_length=100,null=True)
-
-	path_depth = models.IntegerField(default=1,db_index=True)   #当前节点相对于root的深度
-	path_id = models.CharField(max_length=400,db_index=True)   # node_node2_node3
-
-
 class ErrorDef(models.Model):
 	doc = models.ForeignKey(ApiDoc)
 	code = models.CharField(max_length=20,db_index=True,verbose_name=u'错误编码')
+	name = models.CharField(max_length=40,db_index=True,verbose_name=u'错误名称')
 	message = models.CharField(max_length=200,null=True)

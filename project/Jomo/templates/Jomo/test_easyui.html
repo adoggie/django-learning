@@ -21,39 +21,22 @@
 
 </head>
 <body>
-<a id="button1" class="easyui-linkbutton">get count</a>
-<ul id="list" class="easyui-datalist" title="Basic DataList" style="width:400px;height:250px"
-    checkbox="true" selectoncheck="false"
 
-    >
-    <li value="AL">Alabama</li>
-    <li value="AK">Alaska</li>
-    <li value="AZ">Arizona</li>
-    <li value="AR">Arkansas</li>
-    <li value="CA">California</li>
-</ul>
+<table id="grid" class="easyui-datagrid" rowNumbers="true"
+    url="http://127.0.0.1:8000/jomo/rest/wxusers/"
+       method="get" style="height: 300px" singleSelect="true"
+       pagination="true"
+>
+<thead>
+			<tr>
+				<th data-options="field:'wechaname',width:180">wechar-name</th>
+				<th data-options="field:'wecha_id',width:180">wechar-id</th>
+				<th data-options="field:'tel',width:100">telphone</th>
+			</tr>
+		</thead>
+</table>
 
-
-<div id="tb" style="padding:5px;height:auto">
-    <div style="margin-bottom:5px">
-        <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"></a>
-        <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true"></a>
-        <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true"></a>
-        <a href="#" class="easyui-linkbutton" iconCls="icon-cut" plain="true"></a>
-        <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"></a>
-    </div>
-    <div>
-        Date From: <input class="easyui-datebox" style="width:80px">
-        To: <input class="easyui-datebox" style="width:80px">
-        Language:
-        <input class="easyui-combobox" style="width:100px"
-               url="data/combobox_data.json"
-               valueField="id" textField="text">
-        <a href="#" class="easyui-linkbutton" iconCls="icon-search">Search</a>
-    </div>
-</div>
-
-
+<a id="button2" class="easyui-linkbutton">load datagrid panel</a>
 
 
 <script>
@@ -80,7 +63,46 @@
             }
         });
 
+        $('#button2').linkbutton({
+            onClick: function () {
+//                $.ajax({
+//                    url:'easyui_dialog.html',
+//                    success: function (data,status,xhr) {
+//                        $('#grid').html(data );
+//                        $('#gridlist').datagrid();
+//                    }
+//                });
+
+                $('#grid').load('easyui_dialog.html',function (data) {
+                    console.log( data );
+                    $.parser.parse('#grid');
+                    changeBorder('lines-bottom');
+
+
+                });
+
+
+            }
+        });
+//        var dialog1 = $('<div>').dialog({
+//            autoOpen: false,
+//            modal:true,
+//            open:function () {
+//                $(this).load('easyui_dialog.html');
+//            },
+//            height:400,
+//            width:400,
+//            title:'test load dialog'
+//        });
+
     });
+
+
+        function changeBorder(cls){
+            $('#gridlist').datagrid('getPanel').removeClass('lines-both lines-no lines-right lines-bottom').addClass(cls);
+        }
+
+
 
 </script>
 
