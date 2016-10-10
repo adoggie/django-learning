@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+
+	<link rel="stylesheet" type="text/css" href="http://127.0.0.1:9900/static/js/jeasyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="http://127.0.0.1:9900/static/js/jeasyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="http://127.0.0.1:9900/static/js/jeasyui/demo.css">
+	<script type="application/javascript" src="http://127.0.0.1:9900/static/js/jeasyui/jquery.min.js"></script>
+	<script type="application/javascript" src="http://127.0.0.1:9900/static/js/jeasyui/jquery.easyui.min.js"></script>
+
+
+
+	<!--{% load static %}-->
+	<!--<link rel="stylesheet" type="text/css" href="{% static 'js/jeasyui/themes/default/easyui.css'%}">-->
+	<!--<link rel="stylesheet" type="text/css" href="{% static 'js/jeasyui/themes/icon.css' %}">-->
+	<!--<link rel="stylesheet" type="text/css" href="{% static 'js/jeasyui/demo.css' %}">-->
+	<!--<script type="application/javascript" src="{% static 'js/jeasyui/jquery.min.js'%}"></script>-->
+	<!--<script type="application/javascript" src="{% static 'js/jeasyui/jquery.easyui.min.js'%}"></script>-->
+
+	<style>
+		html, body{ margin:0; height:100%; }
+	</style>
+</head>
+<body>
+
+<div id="dlg_app" ></div>
+<div id="dlg_module" ></div>
+<div id="dlg_sheet" ></div>
+
+<div id="cc" class="easyui-layout" data-options="fit:true" >
+	<div data-options="region:'north',title:'North Title',split:false,collapsible:false,border:true,title:null"
+		 style="height:40px;">
+		<a class="easyui-linkbutton">button1</a>
+		<a class="easyui-linkbutton">button2</a>
+	</div>
+	<div data-options="region:'south',title:'',split:false" style="height:20px;"></div>
+	<div data-options="region:'west',title:'',split:true" style="width:300px;height: 100%">
+		<div class="easyui-layout" data-options="fit:true">
+			<!-- app-list -->
+			<div  data-options="region:'north',title:'applications',collapsible:false,split:true" style="height: 50%">
+
+				<div id="tb_app">
+					<a id="btn_app_new" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">new</a>
+					<a id="btn_app_edit" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">edit</a>
+					<a id="btn_app_del" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true">del</a>
+				</div>
+
+				<table id="list_app" class="easyui-datagrid" style="height:100%"
+				       data-options="rownumbers:true,singleSelect:true,toolbar:'#tb_app',
+						method:'get',
+						idField:'id'
+				       ">
+					<thead>
+						<tr>
+							<th data-options="field:'name',width:100">Name</th>
+							<th data-options="field:'ver',width:100">Ver</th>
+							<th data-options="field:'description',width:200">Description</th>
+						</tr>
+					</thead>
+				</table>
+
+			</div>
+
+			<div title="modules" data-options="region:'center',split:true" >
+
+						<div id="tb_module">
+							<a id="btn_m_new" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">new</a>
+							<a id="btn_m_edit" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">edit</a>
+							<a id="btn_m_del" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true">del</a>
+						</div>
+
+
+						<table id="list_module" class="easyui-datagrid" style="height:100%"
+						       data-options="rownumbers:true,singleSelect:true,
+						       toolbar:'#tb_module',
+						       idField:'id',
+						       method:'get',
+						       url:'/webapi/modules/'
+						       ">
+							<thead>
+								<tr>
+									<th data-options="field:'name',width:100">Name</th>
+									<th data-options="field:'description'">Description</th>
+								</tr>
+							</thead>
+						</table>
+			</div>
+
+
+		</div>
+	</div>
+
+	<div data-options="region:'center',title:''" style="padding:5px;background:#eee;">
+		<div id="tabs_content" class="easyui-tabs">
+			<div title="sheets">
+				<div id="tb_sheet">
+					<a id="btn_sheet_new" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">new</a>
+					<a id="btn_sheet_edit" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">edit</a>
+					<a id="btn_sheet_del" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true">del</a>
+				</div>
+
+				<table id="list_sheet" class="easyui-datagrid" style="width:100%;height:100%"
+				       data-options="rownumbers:true,singleSelect:true,method:'get',idField:'id',toolbar:'#tb_sheet',
+				       emptyMsg:'no sheet defined',
+				       url:'/webapi/sheets/',
+				       ">
+					<thead>
+						<tr>
+							<th data-options="field:'name',width:100">Name</th>
+							<th data-options="field:'method',width:50">Method</th>
+							<th data-options="field:'url',width:100">Url</th>
+							<th data-options="field:'description'">Description</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+
+<script>
+
+	$(document).ready(function(){
+
+		$('#list_app').datagrid({
+			url:'/webapi/applications/',
+			onSelect:function(index,row){
+				$('#list_module').datagrid('load',{
+						app_id:row.id
+				});
+			}
+		});
+
+		$('#list_module').datagrid({
+			onSelect:function(index,row){
+				$('#list_sheet').datagrid('load',{
+					module_id:row.id
+				})
+			}
+		});
+
+	});
+</script>
+
+<script type="application/javascript" src="/static/webapi/app.js"></script>
+<script type="application/javascript" src="/static/webapi/module.js"></script>
+<script type="application/javascript" src="/static/webapi/sheet.js"></script>
+
+</body>
+</html>

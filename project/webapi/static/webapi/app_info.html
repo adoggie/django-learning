@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+
+	<link rel="stylesheet" type="text/css" href="http://127.0.0.1:9900/static/js/jeasyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="http://127.0.0.1:9900/static/js/jeasyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="http://127.0.0.1:9900/static/js/jeasyui/demo.css">
+	<script type="application/javascript" src="http://127.0.0.1:9900/static/js/jeasyui/jquery.min.js"></script>
+	<script type="application/javascript" src="http://127.0.0.1:9900/static/js/jeasyui/jquery.easyui.min.js"></script>
+
+
+</head>
+<body>
+
+<div class="easyui-panel" data-options="fit:true" style="width:100%;padding:30px 30px;">
+		<form id="form_app" method="post">
+			<input id="id" type="hidden">
+			<div style="margin-bottom:10px">
+				<input id="name" class="easyui-textbox" name="name" style="width:100%" data-options="prompt:'名称',required:true">
+			</div>
+			<div style="margin-bottom:10px">
+				<input id="ver" class="easyui-textbox" name="ver" style="width:100%" data-options="prompt:'版本:',required:false">
+			</div>
+			<div style="margin-bottom:20px">
+				<input id="description" class="easyui-textbox" name="description" style="width:100%;height:60px" data-options="prompt:'描述',multiline:true">
+			</div>
+			<div style="margin-bottom:10px">
+				<a id="btn_save" class="easyui-linkbutton" data-options="iconCls:'icon-save'">Save</a>
+			</div>
+		</form>
+	</div>
+
+
+<script>
+
+	var app = $('#dlg_app').data('app');
+	if( app != null){
+		$('#form_app').form('load',{
+				id:app.id,
+				name:app.name,
+				ver:app.ver,
+				description: app.description
+			});
+		$('#form_app').form({
+			url:'/webapi/applications/'+app.id +'/'
+		});
+	}else{
+		$('#form_app').form({
+			url:'/webapi/applications/'
+		});
+	}
+
+	$('#btn_save').click(function(){
+		if( app == null){
+			if( $('#form_app').form('validate') ==false){
+				alert('data error');
+				return;
+			}
+			$('#form_app').form( 'submit',{
+				success:function(data){
+					alert(JSON.stringify(data) );
+				}
+			});
+		}else{
+			if( $('#form_app').form('validate') ==false){
+				alert('data error');
+				return;
+			}
+			$.ajax(
+					{
+						url:'/webapi/applications/'+app.id +'/',
+						method:'PUT',
+						data:{
+							name:$('#name').val(),
+							ver:$('#ver').val(),
+							description:$('#description').val()
+						},
+						success:function(data){
+							//$.messager.alert('prompt',  JSON.stringify(data));
+							$('#list_app').datagrid('reload');
+							$('#dlg_app').dialog('close');
+						}
+					}
+			).done();
+
+		}
+	});
+</script>
+
+</body>
+</html>

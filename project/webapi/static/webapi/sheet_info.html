@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+
+	<link rel="stylesheet" type="text/css" href="http://127.0.0.1:9900/static/js/jeasyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="http://127.0.0.1:9900/static/js/jeasyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="http://127.0.0.1:9900/static/js/jeasyui/demo.css">
+	<script type="application/javascript" src="http://127.0.0.1:9900/static/js/jeasyui/jquery.min.js"></script>
+	<script type="application/javascript" src="http://127.0.0.1:9900/static/js/jeasyui/jquery.easyui.min.js"></script>
+</head>
+<body>
+
+<div class="easyui-panel" data-options="fit:true" style="width:100%;height:100%;padding:30px 30px;">
+		<form id="form_sheet" method="post">
+			<div style="margin-bottom:10px">
+				<a id="btn_save" class="easyui-linkbutton" data-options="iconCls:'icon-save'">Save</a>
+			</div>
+			<input id="id" type="hidden">
+			<div style="margin-bottom:10px">
+				<label for="name">Name</label>
+				<input id="name" class="easyui-textbox" name="name" style="width:100%" data-options="prompt:'',required:true">
+			</div>
+
+			<div style="margin-bottom:10px">
+				<label for="ver">Version</label>
+				<input id="ver" class="easyui-textbox" name="ver" style="width:100%" data-options="">
+			</div>
+			<div style="margin-bottom:10px">
+				<label for="url">URL</label>
+				<input id="url" class="easyui-textbox" name="url" style="width:100%" data-options="required:true">
+			</div>
+
+			<div style="margin-bottom:10px">
+				<label for="method">Method</label>
+				<select id="method" class="easyui-combobox" name="method" style="width:100px;">
+					<option value="get">GET</option>
+					<option value="post">POST</option>
+					<option value="put">PUT</option>
+					<option value="patch">PATCH</option>
+					<option value="delete">DELETE</option>
+				</select>
+			</div>
+
+
+
+			<div style="margin-bottom:20px">
+				<label for="description">Description</label>
+				<input id="description" class="easyui-textbox" name="description" style="width:100%;height:60px" data-options="multiline:true">
+			</div>
+
+
+			<div class="easyui-panel" title="Request" style="width: 100%"  collapsible="true">
+
+				<div class="easyui-panel" title="Headers" style="width: 100%">
+					<div id="tb_sheet_req_header">
+						<a id="btn_sheet_req_header_new" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">new</a>
+						<a id="btn_sheet_req_header_edit" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">edit</a>
+						<a id="btn_sheet_req_header_del" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true">del</a>
+					</div>
+
+					<table id="list_req_header" class="easyui-datagrid" style="width:100%;height:150px"
+					    data-options="
+					        rownumbers: true,
+						    idField:'id',
+						    treeField:'name',
+						    toolbar:'#tb_sheet_req_header',
+						    ">
+					    <thead>
+							<tr>
+								<th data-options="field:'name',width:80,
+									editor:{
+										type:'combobox',
+										options:{
+											valueField:'value',
+											textField:'text',
+											url:'/static/webapi/req_header.json',
+										}
+									}
+									">Name</th>
+								<th data-options="field:'type',width:60,
+									editor:{
+										type:'combobox',
+										options:{
+											valueField:'value',
+											textField:'text',
+											data:[
+												{value:'string',text:'string'},
+												{value:'int',text:'int'},
+												{value:'float',text:'float'},
+												{value:'bool',text:'bool'},
+												{value:'array',text:'array'},
+												{value:'dictionary',text:'dictionary'},
+											]
+										}
+									}
+								">Type</th>
+								<th data-options="field:'default',width:80,editor:{type:'text'}">Value</th>
+								<th data-options="field:'description',width:200,editor:{type:'textarea'}">Description</th>
+							</tr>
+					    </thead>
+					</table>
+				</div>
+				<div class="easyui-panel" title="Parameters" style="width: 100%">
+					<div id="tb_sheet_req_param">
+						<a id="btn_sheet_req_param_new" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">new</a>
+						<a id="btn_sheet_req_param_edit" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">edit</a>
+						<a id="btn_sheet_req_param_del" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true">del</a>
+					</div>
+					<table id="list_req_parameter" class="easyui-treegrid" style="width:100%;height:150px"
+					    data-options="idField:'id',treeField:'name',
+					        toolbar:'#tb_sheet_req_param',
+					    ">
+					    <thead>
+							<tr>
+								<th data-options="field:'name',width:180">Name</th>
+								<th data-options="field:'type',width:60">Type</th>
+								<th data-options="field:'default',width:80">Default-Value</th>
+								<th data-options="field:'description',width:200">Description</th>
+							</tr>
+					    </thead>
+					</table>
+				</div>
+			</div>
+
+			<div class="easyui-panel" title="Response" style="width: 100%">
+				<div class="easyui-panel" title="Headers" style="width: 100%">
+					<div id="tb_sheet_req_header">
+						<a id="btn_sheet_resp_header_new" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">new</a>
+						<a id="btn_sheet_resp_header_edit" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">edit</a>
+						<a id="btn_sheet_resp_header_del" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true">del</a>
+					</div>
+
+					<table id="list_resp_header" class="easyui-datagrid" style="width:100%;height:150px"
+					    data-options="
+					        rownumbers: true,
+						    idField:'id',
+						    treeField:'name',
+						    toolbar:'#tb_sheet_resp_header',
+						    ">
+					    <thead>
+							<tr>
+								<th data-options="field:'name',width:80,
+									editor:{
+										type:'combobox',
+										options:{
+											valueField:'value',
+											textField:'text',
+											url:'/static/webapi/req_header.json',
+										}
+									}
+									">Name</th>
+								<th data-options="field:'type',width:60,
+									editor:{
+										type:'combobox',
+										options:{
+											valueField:'value',
+											textField:'text',
+											data:[
+												{value:'string',text:'string'},
+												{value:'int',text:'int'},
+												{value:'float',text:'float'},
+												{value:'bool',text:'bool'},
+												{value:'array',text:'array'},
+												{value:'dictionary',text:'dictionary'},
+											]
+										}
+									}
+								">Type</th>
+								<th data-options="field:'default',width:80,editor:{type:'text'}">Value</th>
+								<th data-options="field:'description',width:200,editor:{type:'textarea'}">Description</th>
+							</tr>
+					    </thead>
+					</table>
+				</div>
+
+
+				<div title="Data" id="sheet_resp_tabs" class="easyui-panel" style="width: 100%">
+					<div style="margin-bottom:10px">
+						<label for="method">Http Status:</label>
+							<select id="resp_status" class="easyui-combobox" name="resp_status" style="width:100px;">
+								<option value="200">200</option>
+								<option value="400">400</option>
+								<option value="500">500</option>
+							</select>
+						<div class="easyui-panel" title="" style="width: 100%;">
+							<div id="tb_sheet_req_param">
+								<a id="btn_sheet_resp_param_new" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">new</a>
+								<a id="btn_sheet_resp_param_edit" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">edit</a>
+								<a id="btn_sheet_resp_param_del" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true">del</a>
+							</div>
+							<table id="list_resp_parameter" class="easyui-treegrid" style="width:100%;height:150px"
+							    data-options="idField:'id',treeField:'name',
+							    ">
+							    <thead>
+									<tr>
+										<th data-options="field:'name',width:180">Name</th>
+										<th data-options="field:'type',width:60">Type</th>
+										<th data-options="field:'default',width:80">Default-Value</th>
+										<th data-options="field:'description',width:200">Description</th>
+									</tr>
+							    </thead>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div style="margin-bottom:20px">
+				<label for="comment">Remarks</label>
+				<input id="comment" class="easyui-textbox" name="comment" style="width:100%;height:60px" data-options="multiline:true">
+			</div>
+
+
+			<div style="margin-bottom:10px">
+				<a id="btn_save" class="easyui-linkbutton" data-options="iconCls:'icon-save'">Save</a>
+			</div>
+		</form>
+	</div>
+
+
+<script>
+
+	$.extend($.fn.datagrid.methods, {
+			editCell: function(jq,param){
+				return jq.each(function(){
+					var opts = $(this).datagrid('options');
+					var fields = $(this).datagrid('getColumnFields',true).concat($(this).datagrid('getColumnFields'));
+					for(var i=0; i<fields.length; i++){
+						var col = $(this).datagrid('getColumnOption', fields[i]);
+						col.editor1 = col.editor;
+						if (fields[i] != param.field){
+							col.editor = null;
+						}
+					}
+					$(this).datagrid('beginEdit', param.index);
+                    var ed = $(this).datagrid('getEditor', param);
+                    if (ed){
+                        if ($(ed.target).hasClass('textbox-f')){
+                            $(ed.target).textbox('textbox').focus();
+                        } else {
+                            $(ed.target).focus();
+                        }
+                    }
+					for(var i=0; i<fields.length; i++){
+						var col = $(this).datagrid('getColumnOption', fields[i]);
+						col.editor = col.editor1;
+					}
+				});
+			},
+            enableCellEditing: function(jq){
+                return jq.each(function(){
+                    var dg = $(this);
+                    var opts = dg.datagrid('options');
+                    opts.oldOnClickCell = opts.onClickCell;
+                    opts.onClickCell = function(index, field){
+                        if (opts.editIndex != undefined){
+                            if (dg.datagrid('validateRow', opts.editIndex)){
+                                dg.datagrid('endEdit', opts.editIndex);
+                                opts.editIndex = undefined;
+                            } else {
+                                return;
+                            }
+                        }
+                        dg.datagrid('selectRow', index).datagrid('editCell', {
+                            index: index,
+                            field: field
+                        });
+                        opts.editIndex = index;
+                        opts.oldOnClickCell.call(this, index, field);
+                    }
+                });
+            }
+		});
+
+	//var sheet = $('#dlg_sheet').data('sheet');
+	$('#list_req_header').datagrid().datagrid('enableCellEditing');
+	$('#list_resp_header').datagrid().datagrid('enableCellEditing');
+
+	function  init_new_data(){
+		$('#list_req_header').datagrid('appendRow',{name:'text'});
+		$('#list_req_header').datagrid('appendRow',{name:'text'});
+	}
+	init_new_data();
+
+	//if( sheet == undefined){
+	//	init_new_data();
+	//}
+
+
+	$('#btn_sheet_req_header_new').click(function(){
+		$('#list_req_header').datagrid('appendRow',{name:' undefined'});
+	});
+
+	$('#btn_sheet_resp_header_new').click(function(){
+		$('#list_resp_header').datagrid('appendRow',{name:' undefined'});
+	});
+
+	var m = $('#dlg_module').data('module');
+	var app = $('#dlg_module').data('app');
+	if( m != null){
+		$('#form_module').form('load',{
+				id:m.id,
+				name:m.name,
+				description: m.description
+			});
+		$('#form_module').form({
+			url:'/webapi/modules/'+m.id +'/'
+		});
+	}else{
+		$('#form_module').form({
+			url:'/webapi/modules/'
+		});
+	}
+
+	$('#btn_save').click(function(){
+		if( m == null){ // new
+			if( $('#form_module').form('validate') ==false){
+				alert('data error');
+				return;
+			}
+			$.ajax({
+				url:'/webapi/modules/',
+						method:'POST',
+						data:{
+							app_id:app.id,
+							name:$('#name').val(),
+							description:$('#description').val()
+						},
+						success:function(data){
+							$('#list_module').datagrid('reload');
+							$('#dlg_module').dialog('close');
+						}
+			});
+
+		}else{ // update
+			if( $('#form_module').form('validate') ==false){
+				alert('data error');
+				return;
+			}
+			$.ajax(
+					{
+						url:'/webapi/modules/'+m.id +'/',
+						method:'PUT',
+						data:{
+							name:$('#name').val(),
+							description:$('#description').val()
+						},
+						success:function(data){
+							//$.messager.alert('prompt',  JSON.stringify(data));
+							$('#list_module').datagrid('reload');
+							$('#dlg_module').dialog('close');
+						}
+					}
+			).done();
+
+		}
+	});
+</script>
+
+</body>
+</html>

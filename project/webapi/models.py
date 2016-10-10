@@ -11,6 +11,7 @@ class Application(models.Model):
 	name = models.CharField( max_length=100 ,null=True)
 	ver = models.CharField(max_length=20,null=True)
 	description = models.CharField( max_length= 1000,null=True)
+	create_date = models.DateField()
 
 class Module(models.Model):
 	app = models.ForeignKey(Application)
@@ -46,10 +47,15 @@ class ApiDoc(models.Model):
 	url = models.CharField(max_length= 200)
 	method = models.CharField(max_length=20,default=GET,choices=CHOICE_METHOD)
 	comment = models.TextField(null=True)
-	req_headers = models.CharField(max_length=2000,null=True)
-	req_paramters = models.CharField(max_length=2000,null=True)
-	resp_headers = models.CharField(max_length=2000,null=True)
-	resp_data =  models.CharField(max_length=2000,null=True)
+	headers = models.CharField(max_length=2000,null=True)
+	paramters = models.CharField(max_length=2000,null=True)
+
+
+class DocumentResponse(models.Model):
+	doc = models.ForeignKey(ApiDoc,related_name='apidoc_response_set')
+	status = models.CharField(max_length=20,default='200')
+	headers = models.CharField(max_length=2000,null=True)
+	data = models.CharField(max_length=2000,null=True)
 
 
 UTF8 = 'utf-8'
