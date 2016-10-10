@@ -1,0 +1,6 @@
+[
+  {"id":1,"name":"status", "type":"int","default":0,"description":" 0 - succ ; others - fail"},
+  {"id":2,"name":"errcode", "type":"string","default":"0","description":""},
+  {"id":3,"name":"errmsg", "type":"string","default":"","description":""},
+  {"id":4,"name":"result", "type":"string","default":"","description":""}
+]

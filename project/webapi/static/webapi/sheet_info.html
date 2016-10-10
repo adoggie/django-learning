@@ -57,7 +57,6 @@
 				<div class="easyui-panel" title="Headers" style="width: 100%">
 					<div id="tb_sheet_req_header">
 						<a id="btn_sheet_req_header_new" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">new</a>
-						<a id="btn_sheet_req_header_edit" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">edit</a>
 						<a id="btn_sheet_req_header_del" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true">del</a>
 					</div>
 
@@ -67,6 +66,8 @@
 						    idField:'id',
 						    treeField:'name',
 						    toolbar:'#tb_sheet_req_header',
+						    singleSelect:true,
+						    onAfterEdit:function(row,changes){ onDataChanged();}
 						    ">
 					    <thead>
 							<tr>
@@ -107,14 +108,12 @@
 					<div id="tb_sheet_req_param">
 						<a id="btn_sheet_req_param_new" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">new</a>
 						<a id="btn_sheet_req_param_newsub" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">new sub</a>
-						<a id="btn_sheet_req_param_edit" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">edit</a>
 						<a id="btn_sheet_req_param_del" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true">del</a>
 					</div>
 					<table id="list_req_parameter" class="easyui-treegrid" style="width:100%;height:150px"
 							    data-options="idField:'id',treeField:'name',
-							        url:'/static/webapi/new_resp_data.json',
 							        rownumbers: true,
-
+							        onAfterEdit:function(row,changes){ onDataChanged();}
 							    ">
 							    <thead>
 									<tr>
@@ -151,7 +150,6 @@
 				<div class="easyui-panel" title="Headers" style="width: 100%">
 					<div id="tb_sheet_req_header">
 						<a id="btn_sheet_resp_header_new" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">new</a>
-						<a id="btn_sheet_resp_header_edit" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">edit</a>
 						<a id="btn_sheet_resp_header_del" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true">del</a>
 					</div>
 
@@ -161,6 +159,8 @@
 						    idField:'id',
 						    treeField:'name',
 						    toolbar:'#tb_sheet_resp_header',
+						    singleSelect:true,
+						    onAfterEdit:function(row,changes){ onDataChanged();}
 						    ">
 					    <thead>
 							<tr>
@@ -208,17 +208,16 @@
 								<option value="500">500</option>
 							</select>
 						<div class="easyui-panel" title="" style="width: 100%;">
-							<div id="tb_sheet_req_param">
+							<div >
 								<a id="btn_sheet_resp_param_new" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">new</a>
 								<a id="btn_sheet_resp_param_newsub" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">new sub</a>
-								<a id="btn_sheet_resp_param_edit" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">edit</a>
 								<a id="btn_sheet_resp_param_del" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true">del</a>
 							</div>
 							<table id="list_resp_parameter" class="easyui-treegrid" style="width:100%;height:150px"
 							    data-options="idField:'id',treeField:'name',
-							        url:'/static/webapi/new_resp_data.json',
-							        rownumbers: true,
 
+							        rownumbers: true,
+									onAfterEdit:function(row,changes){ onDataChanged();}
 							    ">
 							    <thead>
 									<tr>
@@ -256,7 +255,7 @@
 				<div class="easyui-tabs" style="width:100%">
 					<div title="Curl" >
 						<div style="margin:10px 10px" >
-							<input id="description" class="easyui-textbox" name="description" style="width:100%;height:150px" data-options="multiline:true">
+							<input id="example_curl" class="easyui-textbox"  style="width:100%;height:150px" data-options="multiline:true">
 						</div>
 
 					</div>
@@ -290,14 +289,37 @@
 
 
 	function  init_new_data(){
-		$('#list_req_header').datagrid('appendRow',{name:'text'});
-		$('#list_req_header').datagrid('appendRow',{name:'text'});
+		$('#list_resp_parameter').treegrid({
+			 url:'/static/webapi/new_resp_data.json'
+		});
+
 	}
-	init_new_data();
+
 
 	//if( sheet == undefined){
 	//	init_new_data();
 	//}
+
+	// begin request
+
+
+	$('#btn_sheet_req_header_new').click(function(){
+		$('#list_req_header').datagrid('appendRow',{id:UUID(),name:' undefined'});
+		onDataChanged();
+	});
+
+	$('#btn_sheet_req_header_del').click(function(){
+		var dg = $('#list_req_header').datagrid();
+		var row = dg.datagrid('getSelected');
+		if( row == undefined){
+			alert("please select one  node!");
+			return ;
+		}
+		var index = dg.datagrid('getRowIndex',row);
+		dg.datagrid('deleteRow', index);
+		onDataChanged();
+	});
+
 
 	$('#btn_sheet_req_param_new').click(function(){
 		$('#list_req_parameter').treegrid('append',{
@@ -306,9 +328,13 @@
 				{name:'undefined',id:UUID(),"type":"string","default":""},
 			]
 		});
+		onDataChanged();
 	});
 
 	$('#btn_sheet_req_param_newsub').click(function(){
+		$('#list_req_parameter').treegrid('stopCellEditing');
+
+
 		var node = $('#list_req_parameter').treegrid('getSelected');
 		if(node == undefined){
 			alert("please select one parent node!");
@@ -321,64 +347,171 @@
 						{name:'undefined',id:UUID(),"type":"string","default":""},
 					]
 				});
+		onDataChanged();
 	});
 
-
-
-
-	$('#btn_sheet_req_header_new').click(function(){
-		$('#list_req_header').datagrid('appendRow',{name:' undefined'});
+	$('#btn_sheet_req_param_del').click(function(){
+		var node = $('#list_req_parameter').treegrid('getSelected');
+		if(node == undefined){
+			return ;
+		}
+		$('#list_req_parameter').treegrid('remove',node.id);
+		onDataChanged();
 	});
+
+	// end request
+
+	// begin response
 
 	$('#btn_sheet_resp_header_new').click(function(){
-		$('#list_resp_header').datagrid('appendRow',{name:' undefined'});
+		$('#list_resp_header').datagrid('appendRow',{id:UUID(),name:' undefined'});
+		onDataChanged();
+	});
+
+	$('#btn_sheet_resp_header_del').click(function(){
+		var dg = $('#list_resp_header').datagrid();
+		var row = $('#list_resp_header').datagrid('getSelected');
+		if( row == undefined){
+			return ;
+		}
+		var index = $('#list_resp_header').datagrid('getRowIndex',row);
+		$('#list_resp_header').datagrid('deleteRow',index);
+		onDataChanged();
+	});
+
+
+	$('#btn_sheet_resp_param_new').click(function(){
+		$('#list_resp_parameter').treegrid('append',{
+			parent:null,
+			data:[
+				{name:'undefined',id:UUID(),"type":"string","default":""},
+			]
+		});
+		onDataChanged();
 	});
 
 	$('#btn_sheet_resp_param_newsub').click(function(){
-		var node = $('#list_resp_parameter').treegrid('getSelected');
+		$('#list_resp_parameter').treegrid('stopCellEditing');
+		var node =  $('#list_resp_parameter').treegrid('getSelected');
 		if(node == undefined){
 			alert("please select one parent node!");
 			return ;
 		}
-		$('#list_resp_parameter').treegrid('append',
-				{
-					parent:node.id,
-					data:[
-						{name:'undefined',id:UUID(),"type":"string","default":""},
-					]
-				});
+
+		 $('#list_resp_parameter').treegrid('append',
+			{
+				parent:node.id,
+				data:[
+					{name:'undefined',id:UUID(),"type":"string","default":""},
+				]
+			});
+		onDataChanged();
 	});
 
+	$('#btn_sheet_resp_param_del').click(function(){
+
+		var node =$('#list_resp_parameter').treegrid('getSelected');
+		if(node == undefined){
+			alert('select one row');
+			return ;
+		}
+		$('#list_resp_parameter').treegrid('remove',node.id);
+		onDataChanged();
+	});
+
+	function example_curl(){
+		var data_req_headers = $('#list_req_header').datagrid('getData').rows;
+		var data_req_parameters = $('#list_req_parameter').treegrid('getData');
+
+		var data_resp_headers = $('#list_resp_header').datagrid('getData');
+		var data_resp_parameters = $('#list_resp_parameter').treegrid('getData');
+
+		var url = "http://127.0.0.1:8000/"+ $('#url').val();
+		var method =  $('#method').val().toUpperCase();
+		var text = "curl -X " + method;
+		//alert( JSON.stringify( data_resp_parameters) );
+		var data = data_req_parameters.map(function(_){
+				return _['name']+'='+ encodeURI(_['default']);
+			}).join('&');
+
+		if(method == 'GET'){
+			url+='?';
+			url+= data;
+		}else{
+			data = ' -d ' + data
+		}
+
+		var header = '';
+
+		header += data_req_headers.map(function(_){
+			return ' -H ' + "'"+_['name'] +':'+ encodeURI(_['default']) +"'";
+		}).join(' ')
 
 
-	var m = $('#dlg_module').data('module');
-	var app = $('#dlg_module').data('app');
-	if( m != null){
-		$('#form_module').form('load',{
-				id:m.id,
-				name:m.name,
-				description: m.description
-			});
-		$('#form_module').form({
-			url:'/webapi/modules/'+m.id +'/'
-		});
-	}else{
-		$('#form_module').form({
-			url:'/webapi/modules/'
-		});
+		text+= data + " " + url + header;
+		return text;
 	}
 
+	function onDataChanged(){
+		$('#example_curl').textbox('setValue',example_curl());
+
+	}
+	// start
+
+	var data = $('#dlg_sheet').data('data');
+
+//	var action = data.action; // new ,copy,edit
+//	var sheet_id = data.id;
+//	var module_id = data.module;
+	init_new_data();
+	//if( action == 'new'){
+	//	init_new_data();
+	//}
+
 	$('#btn_save').click(function(){
-		if( m == null){ // new
-			if( $('#form_module').form('validate') ==false){
-				alert('data error');
-				return;
-			}
+		//alert( example_curl() );
+
+		alert( $('#example_curl').val() );
+		return ;
+
+		if( $('#form_sheet').form('validate') ==false){
+			alert('form data invalidate!');
+			return;
+		}
+
+		var data_req_headers = $('#list_req_header').datagrid('getData');
+		var data_req_parameters = $('#list_req_parameter').treegrid('getData');
+
+		var data_resp_headers = $('#list_resp_header').datagrid('getData');
+		var data_resp_parameters = $('#list_resp_parameter').treegrid('getData');
+
+		var req_data ={
+							name: $('#name').val(),
+							ver: $('#ver').val(),
+							url:$('#url').val(),
+							method:$('#method').val(),
+							description: $('#description').val(),
+							comment: $('#comment').val(),
+							headers: data_req_headers,
+							parameters: data_req_parameters,
+							response:
+								{
+									status: $('#resp_status').val(),
+									headers: data_resp_headers,
+									data: data_resp_parameters
+								},
+							examples: $('#examples').val()
+						};
+
+
+		if( action == 'new'){ // new
+
 			$.ajax({
-				url:'/webapi/modules/',
+				url:'/webapi/sheets/',
 						method:'POST',
 						data:{
-							app_id:app.id,
+							name: $('#name').val(),
+							ver: $('#ver').val(),
 							name:$('#name').val(),
 							description:$('#description').val()
 						},
@@ -411,6 +544,8 @@
 
 		}
 	});
+
+
 </script>
 
 </body>
