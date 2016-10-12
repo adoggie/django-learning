@@ -18,8 +18,8 @@ from django.contrib import admin
 from django.views.generic.base import TemplateView
 
 from rest_framework.routers import SimpleRouter
-from views import ApplicationViewSet,ModuleViewSet
-from webapi.views import SheetViewSet
+from views import ApplicationViewSet,ModuleViewSet,SheetViewSet
+
 
 router = SimpleRouter()
 router.register('applications',ApplicationViewSet,'application')

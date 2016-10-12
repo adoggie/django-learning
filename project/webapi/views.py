@@ -12,6 +12,7 @@ from django.shortcuts import render
 # Create your views here.
 from rest_framework import serializers
 from rest_framework.authentication import SessionAuthentication
+from rest_framework.decorators import list_route
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.parsers import FormParser
 from rest_framework.response import Response
@@ -173,5 +174,7 @@ class SheetViewSet(ModelViewSet):
 	def filter_queryset(self, queryset):
 		return queryset.filter(module__id=self.request.query_params.get('module_id',0) )
 
-
+	@list_route()
+	def headers(self,request):
+		pass 
 
