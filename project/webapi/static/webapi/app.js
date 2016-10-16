@@ -28,5 +28,35 @@ $(function(){
 		}
 	});
 
+	$('#btn_app_del').click(function(){
+		var app = $('#list_app').datagrid('getSelected');
+		if(app!=null) {
+			$.messager.confirm('Confirm', 'you will delete this row ,really?', function(r){
+				if (!r){
+					return ;
+				}
+
+				$.ajax({
+					url:'/webapi/applications/'+app.id + '/',
+					method: 'delete',
+					success:function(data){
+						if( data.status == 0) {
+							$('#list_app').datagrid('reload');
+						}else{
+							$.messager.alert('error', 'error:'+ data.errcode );
+						}
+
+					},
+					error:function(xhr,status,error){
+						$.messager.alert('error', status + error);
+					}
+				});
+			});
+
+		}else {
+			$.messager.alert("Warning","please select one app row!");
+		}
+	});
+
 });
 

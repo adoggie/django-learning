@@ -50,6 +50,12 @@ class ApiDoc(models.Model):
 	headers = models.CharField(max_length=2000,null=True)
 	paramters = models.CharField(max_length=2000,null=True)
 
+	resp_status = models.CharField(max_length=20,default='200')
+	resp_headers = models.CharField(max_length=2000,null=True)
+	resp_data = models.CharField(max_length=2000,null=True)
+
+	examples = models.CharField(max_length=2000,null=True)
+
 
 class DocumentResponse(models.Model):
 	doc = models.ForeignKey(ApiDoc,related_name='apidoc_response_set')

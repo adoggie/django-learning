@@ -1,5 +1,6 @@
 #coding:utf-8
 import datetime
+import json
 import traceback
 
 from django.contrib.auth.decorators import login_required
@@ -14,12 +15,12 @@ from rest_framework import serializers
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.decorators import list_route
 from rest_framework.pagination import PageNumberPagination
-from rest_framework.parsers import FormParser
+from rest_framework.parsers import FormParser, JSONParser
 from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
 from rest_framework.viewsets import ViewSet, ModelViewSet
 
-from webapi.models import Application, Module, ApiDoc
+from webapi.models import Application, Module, ApiDoc, DocumentResponse
 
 from httputil import SuccCallReturn,FailCallReturn
 
@@ -75,7 +76,7 @@ class ApplicationViewSet(ModelViewSet):
 
 	def get_queryset(self):
 		get_token(self.request)
-		rs = Application.objects.all()
+		rs = Application.objects.all().order_by('name')
 		return rs
 
 	def create(self, request, *args, **kwargs):
@@ -87,7 +88,7 @@ class ApplicationViewSet(ModelViewSet):
 		app.user = User.objects.get(id=1)
 		app.create_date = datetime.datetime.now().date()
 		app.save()
-		app = ser.save()
+		# app = ser.save()
 		r = json.dumps({'status':0,'result':app.id})
 		# return HttpResponse(r,content_type='application/json')
 		return Response({'status':0,'result':app.id})
@@ -106,6 +107,10 @@ class ApplicationViewSet(ModelViewSet):
 		serializer.save()
 		return SuccCallReturn().httpResponse()
 
+	def destroy(self, request, *args, **kwargs):
+		doc = self.get_object()
+		doc.delete()
+		return SuccCallReturn().httpResponse()
 
 class ModuleSerializer(ModelSerializer):
 	# app_id = serializers.IntegerField()
@@ -135,7 +140,9 @@ class ModuleViewSet(ModelViewSet):
 	parser_classes = (FormParser,)
 
 	def get_queryset(self):
-		return Module.objects.all()
+		return Module.objects.filter(app__id = self.request.query_params.get('app_id')).order_by('name')
+
+
 
 	def create(self, request, *args, **kwargs):
 		ser = ModuleSerializer(data = request.data)
@@ -153,7 +160,8 @@ class ModuleViewSet(ModelViewSet):
 
 
 	def update(self, request, *args, **kwargs):
-		instance = self.get_object()
+		# instance = self.get_object()
+		instance = Module.objects.get(id=kwargs.get('pk'))
 		ser = ModuleSerializer(instance,data = request.data)
 		if not ser.is_valid():
 			return FailCallReturn().httpResponse()
@@ -170,11 +178,52 @@ class SheetViewSet(ModelViewSet):
 	serializer_class = SheetSerializer
 	pagination_class = EasyUiPagination
 	queryset = ApiDoc.objects.all()
-	parser_classes = (FormParser,)
-	def filter_queryset(self, queryset):
-		return queryset.filter(module__id=self.request.query_params.get('module_id',0) )
+	# parser_classes = (FormParser,JSONParser)
+	parser_classes = (JSONParser,)
+
+	def get_queryset(self):
+
+		rs = ApiDoc.objects.all()
+		if self.request.query_params.has_key('module_id'):
+			rs = rs.filter(module__id=self.request.query_params.get('module_id',0) )
+		return rs.order_by('name')
 
 	@list_route()
 	def headers(self,request):
 		pass 
 
+
+	def create(self, request, *args, **kwargs):
+		module = Module.objects.get(id = request.data.get('module_id'))
+		doc = ApiDoc()
+		doc.module = module
+		doc.name = request.data.get('name')
+		doc.ver = request.data.get('ver')
+		doc.description = request.data.get('description')
+		doc.url = request.data.get('url')
+		doc.method = request.data.get('method')
+		doc.comment = request.data.get('comment')
+		doc.headers = json.dumps( request.data.get('headers'))
+		doc.paramters = json.dumps( request.data.get('parameters'))
+		doc.resp_status = request.data.get('resp_status')
+		doc.resp_headers =json.dumps( request.data.get('resp_headers'))
+		doc.resp_data = json.dumps( request.data.get('resp_data'))
+		doc.save()
+
+		return SuccCallReturn().assign(doc.id).httpResponse()
+
+	def update(self, request, *args, **kwargs):
+		doc = self.get_object()
+		doc.name = request.data.get('name')
+		doc.ver = request.data.get('ver')
+		doc.description = request.data.get('description')
+		doc.url = request.data.get('url')
+		doc.method = request.data.get('method')
+		doc.comment = request.data.get('comment')
+		doc.headers = json.dumps( request.data.get('headers'))
+		doc.paramters = json.dumps( request.data.get('parameters'))
+		doc.resp_status = request.data.get('resp_status')
+		doc.resp_headers =json.dumps( request.data.get('resp_headers'))
+		doc.resp_data = json.dumps( request.data.get('resp_data'))
+		doc.save()
+		return SuccCallReturn().httpResponse()

@@ -61,7 +61,9 @@
 			}
 			$('#form_app').form( 'submit',{
 				success:function(data){
-					alert(JSON.stringify(data) );
+					//alert(JSON.stringify(data) );
+					$('#list_app').datagrid('reload');
+					$('#dlg_app').dialog('close');
 				}
 			});
 		}else{

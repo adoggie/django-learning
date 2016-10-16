@@ -25,7 +25,7 @@
 				<input id="description" class="easyui-textbox" name="description" style="width:100%;height:60px" data-options="prompt:'描述',multiline:true">
 			</div>
 			<div style="margin-bottom:10px">
-				<a id="btn_save" class="easyui-linkbutton" data-options="iconCls:'icon-save'">Save</a>
+				<a id="btn_module_save" class="easyui-linkbutton" data-options="iconCls:'icon-save'">Save</a>
 			</div>
 		</form>
 	</div>
@@ -50,12 +50,14 @@
 		});
 	}
 
-	$('#btn_save').click(function(){
+	$('#btn_module_save').click(function(){
+
 		if( m == null){ // new
 			if( $('#form_module').form('validate') ==false){
 				alert('data error');
 				return;
 			}
+
 			$.ajax({
 				url:'/webapi/modules/',
 						method:'POST',
@@ -75,13 +77,14 @@
 				alert('data error');
 				return;
 			}
+
 			$.ajax(
 					{
 						url:'/webapi/modules/'+m.id +'/',
 						method:'PUT',
 						data:{
 							name:$('#name').val(),
-							description:$('#description').val()
+							description:$('#form_module #description').val()
 						},
 						success:function(data){
 							//$.messager.alert('prompt',  JSON.stringify(data));

@@ -16,7 +16,7 @@
 <div class="easyui-panel" data-options="fit:true" style="width:100%;height:100%;padding:30px 30px;">
 		<form id="form_sheet" method="post">
 			<div style="margin-bottom:10px">
-				<a id="btn_save" class="easyui-linkbutton" data-options="iconCls:'icon-save'">Save</a>
+				<a id="btn_sheet_save" class="easyui-linkbutton" data-options="iconCls:'icon-save'">Save</a>
 			</div>
 			<input id="id" type="hidden">
 			<div style="margin-bottom:10px">
@@ -255,7 +255,7 @@
 				<div class="easyui-tabs" style="width:100%">
 					<div title="Curl" >
 						<div style="margin:10px 10px" >
-							<input id="example_curl" class="easyui-textbox"  style="width:100%;height:150px" data-options="multiline:true">
+							<input id="examples" class="easyui-textbox"  style="width:100%;height:150px" data-options="multiline:true">
 						</div>
 
 					</div>
@@ -269,7 +269,7 @@
 
 
 			<div style="margin-bottom:10px">
-				<a id="btn_save" class="easyui-linkbutton" data-options="iconCls:'icon-save'">Save</a>
+				<a id="btn_sheet_save2" class="easyui-linkbutton" data-options="iconCls:'icon-save'">Save</a>
 			</div>
 		</form>
 	</div>
@@ -289,9 +289,45 @@
 
 
 	function  init_new_data(){
+
 		$('#list_resp_parameter').treegrid({
 			 url:'/static/webapi/new_resp_data.json'
 		});
+
+		var rows = [{id:1,name:'status',type:'string',default:'ss','description':'no..'},];
+
+		/*
+		rows = [{
+				    "description": " 0 - succ ; others - fail",
+				    "default": 0,
+				    "state": "open",
+				    "type": "int",
+				    "id": 1,
+				    "name": "status"
+				}, {
+				    "description": "",
+				    "default": "0",
+				    "state": "open",
+				    "type": "string",
+				    "id": 2,
+				    "name": "errcode"
+				}, {
+				    "description": "",
+				    "default": "",
+				    "state": "open",
+				    "type": "string",
+				    "id": 3,
+				    "name": "errmsg"
+				}, {
+				    "description": "",
+				    "default": "",
+				    "state": "open",
+				    "type": "string",
+				    "id": 4,
+				    "name": "result"
+				}];
+		*/
+		$('#list_resp_parameter').treegrid('loadData', rows);
 
 	}
 
@@ -423,13 +459,13 @@
 		var data_req_headers = $('#list_req_header').datagrid('getData').rows;
 		var data_req_parameters = $('#list_req_parameter').treegrid('getData');
 
-		var data_resp_headers = $('#list_resp_header').datagrid('getData');
+		var data_resp_headers = $('#list_resp_header').datagrid('getData').rows;
 		var data_resp_parameters = $('#list_resp_parameter').treegrid('getData');
 
 		var url = "http://127.0.0.1:8000/"+ $('#url').val();
 		var method =  $('#method').val().toUpperCase();
 		var text = "curl -X " + method;
-		//alert( JSON.stringify( data_resp_parameters) );
+
 		var data = data_req_parameters.map(function(_){
 				return _['name']+'='+ encodeURI(_['default']);
 			}).join('&');
@@ -454,96 +490,133 @@
 	}
 
 	function onDataChanged(){
-		$('#example_curl').textbox('setValue',example_curl());
+		$('#examples').textbox('setValue',example_curl());
 
 	}
-	// start
+
+	/**
+	 * 	 * @param content
+     */
+	function load_sheet_content(content){
+		$('#name').textbox('setValue',content.name);
+		$('#ver').textbox('setValue',content.ver);
+		$('#url').textbox('setValue',content.url);
+		$('#method').combobox('setValue',content.method);
+		$('#description').textbox('setValue',content.description);
+		$('#comment').textbox('setValue',content.comment);
+		$('#examples').textbox('setValue',content.examples);
+
+		$('#list_req_header').datagrid('loadData',JSON.parse( content.headers) );
+		$('#list_resp_header').datagrid('loadData',JSON.parse( content.resp_headers) );
+
+		$('#list_req_parameter').treegrid('loadData',JSON.parse( content.paramters) );
+		$('#list_resp_parameter').treegrid('loadData',JSON.parse( content.resp_data) );
+		$('#resp_status').combobox('setValue',content.resp_status);
+
+
+	}
+
+	// start entry
 
 	var data = $('#dlg_sheet').data('data');
+	// data - { action,sheet_id,module_id}
+	var action;
 
-//	var action = data.action; // new ,copy,edit
-//	var sheet_id = data.id;
-//	var module_id = data.module;
-	init_new_data();
-	//if( action == 'new'){
-	//	init_new_data();
-	//}
+	action = data.action;
+	// new ,copy,edit
 
-	$('#btn_save').click(function(){
-		//alert( example_curl() );
+	if( action == 'new'){
+		init_new_data();
+	}else {
+		// load sheet detail
 
-		alert( $('#example_curl').val() );
-		return ;
+		$.ajax({
+			url:'/webapi/sheets/'+ data.sheet_id +'/',
+			method: 'get',
+			success: function( data ){
+				//alert( JSON.stringify(data) );
+				var content = data;
+				load_sheet_content( content );
+			},
+			error:function(xhr,status,error){
+				alert(status+error);
+			}
+
+		});
+
+	}
+
+	$('#btn_sheet_save,#btn_sheet_save2').click(function(){
 
 		if( $('#form_sheet').form('validate') ==false){
-			alert('form data invalidate!');
+			alert('form data invalidate');
 			return;
 		}
 
-		var data_req_headers = $('#list_req_header').datagrid('getData');
+		var data_req_headers = $('#list_req_header').datagrid('getData').rows;
 		var data_req_parameters = $('#list_req_parameter').treegrid('getData');
 
-		var data_resp_headers = $('#list_resp_header').datagrid('getData');
+		var data_resp_headers = $('#list_resp_header').datagrid('getData').rows;
 		var data_resp_parameters = $('#list_resp_parameter').treegrid('getData');
 
-		var req_data ={
+		var valid_data ={
 							name: $('#name').val(),
 							ver: $('#ver').val(),
 							url:$('#url').val(),
-							method:$('#method').val(),
+							method:$('#method').combobox('getValue'),
 							description: $('#description').val(),
 							comment: $('#comment').val(),
 							headers: data_req_headers,
 							parameters: data_req_parameters,
-							response:
-								{
-									status: $('#resp_status').val(),
-									headers: data_resp_headers,
-									data: data_resp_parameters
-								},
+
+							resp_status: $('#resp_status').combobox('getValue'),
+							resp_headers: data_resp_headers,
+							resp_data: data_resp_parameters
+							,
 							examples: $('#examples').val()
 						};
 
+		//$.messager.alert('warning', JSON.stringify(valid_data) );
 
-		if( action == 'new'){ // new
-
+		var data = $('#dlg_sheet').data('data');
+		if( data.action == 'new' || data.action == 'copy'){ // new
+			valid_data.module_id = data.module_id;
 			$.ajax({
 				url:'/webapi/sheets/',
 						method:'POST',
-						data:{
-							name: $('#name').val(),
-							ver: $('#ver').val(),
-							name:$('#name').val(),
-							description:$('#description').val()
-						},
+						data:JSON.stringify(valid_data),
+						//dataType:'json',
+						contentType:'application/json',
 						success:function(data){
-							$('#list_module').datagrid('reload');
-							$('#dlg_module').dialog('close');
+							if( data.status !=0){
+								$.messager.alert('error','error:' + data.errcode + ' errmsg:'+ data.errmsg);
+								return ;
+							}
+							$('#list_sheet').datagrid('reload');
+							$('#dlg_sheet').dialog('close');
 						}
 			});
 
-		}else{ // update
-			if( $('#form_module').form('validate') ==false){
-				alert('data error');
-				return;
-			}
-			$.ajax(
-					{
-						url:'/webapi/modules/'+m.id +'/',
-						method:'PUT',
-						data:{
-							name:$('#name').val(),
-							description:$('#description').val()
-						},
-						success:function(data){
-							//$.messager.alert('prompt',  JSON.stringify(data));
-							$('#list_module').datagrid('reload');
-							$('#dlg_module').dialog('close');
-						}
-					}
-			).done();
-
 		}
+
+		if (data.action == 'edit'){
+			$.ajax({
+				url:'/webapi/sheets/'+ data.sheet_id + '/',
+						method:'PUT',
+						data:JSON.stringify(valid_data),
+						//dataType:'json',
+						contentType:'application/json',
+						success:function(data){
+							if( data.status !=0){
+								$.messager.alert('error','error:' + data.errcode + ' errmsg:'+ data.errmsg);
+								return ;
+							}
+							$('#list_sheet').datagrid('reload');
+							$('#dlg_sheet').dialog('close');
+						}
+			});
+		}
+
 	});
 
 

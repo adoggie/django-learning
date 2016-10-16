@@ -33,8 +33,9 @@
 <div id="cc" class="easyui-layout" data-options="fit:true" >
 	<div data-options="region:'north',title:'North Title',split:false,collapsible:false,border:true,title:null"
 		 style="height:40px;">
-		<a class="easyui-linkbutton">button1</a>
-		<a class="easyui-linkbutton">button2</a>
+		<h2>
+			WEB-API Document Maker 0.1 @ scott
+		</h2>
 	</div>
 	<div data-options="region:'south',title:'',split:false" style="height:20px;"></div>
 	<div data-options="region:'west',title:'',split:true" style="width:300px;height: 100%">
@@ -71,8 +72,6 @@
 							<a id="btn_m_edit" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">edit</a>
 							<a id="btn_m_del" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true">del</a>
 						</div>
-
-
 						<table id="list_module" class="easyui-datagrid" style="height:100%"
 						       data-options="rownumbers:true,singleSelect:true,
 						       toolbar:'#tb_module',
@@ -88,31 +87,39 @@
 							</thead>
 						</table>
 			</div>
-
-
 		</div>
 	</div>
 
-	<div data-options="region:'center',title:''" style="padding:5px;background:#eee;">
-		<div id="tabs_content" class="easyui-tabs">
+	<script type="application/javascript">
+		function fixColumnWidth(percent){
+			$('#list_sheet').datagrid()
+		}
+	</script>
+
+	<div data-options="region:'center',title:''" style="padding:5px;">
+		<div id="tabs_content" class="easyui-tabs" style="width: 100%; height: 100%">
 			<div title="sheets">
 				<div id="tb_sheet">
 					<a id="btn_sheet_new" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">new</a>
+					<a id="btn_sheet_copy" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">copy</a>
 					<a id="btn_sheet_edit" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">edit</a>
 					<a id="btn_sheet_del" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true">del</a>
+					<a id="btn_sheet_export" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true">export</a>
 				</div>
 
 				<table id="list_sheet" class="easyui-datagrid" style="width:100%;height:100%"
-				       data-options="rownumbers:true,singleSelect:true,method:'get',idField:'id',toolbar:'#tb_sheet',
+				       data-options="rownumbers:true,singleSelect:true,method:'get',
+				       idField:'id',toolbar:'#tb_sheet',
 				       emptyMsg:'no sheet defined',
 				       url:'/webapi/sheets/',
+
 				       ">
 					<thead>
 						<tr>
-							<th data-options="field:'name',width:100">Name</th>
-							<th data-options="field:'method',width:50">Method</th>
-							<th data-options="field:'url',width:100">Url</th>
-							<th data-options="field:'description'">Description</th>
+							<th data-options="field:'name',width:100">NAME</th>
+							<th data-options="field:'method',width:50">METHOD</th>
+							<th data-options="field:'url',width:150"></th>
+							<th data-options="field:'description',width:250">DESCRIPTION</th>
 						</tr>
 					</thead>
 				</table>
