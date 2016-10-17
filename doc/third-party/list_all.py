@@ -24,3 +24,6 @@ https://pythonhosted.org/Markdown/
 https://github.com/django-crispy-forms/django-crispy-forms
 https://github.com/tomchristie/django-rest-framework/
 
+djangorestframework-xml
+
+

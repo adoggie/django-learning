@@ -59,13 +59,31 @@
 				alert('data error');
 				return;
 			}
+			/*
 			$('#form_app').form( 'submit',{
 				success:function(data){
 					//alert(JSON.stringify(data) );
 					//$('#list_app').datagrid('reload');
 					$('#dlg_app').dialog('close');
 				}
-			});
+			});*/
+			$.ajax(
+					{
+						url:'/webapi/applications/',
+						method:'POST',
+						data:{
+							name:$('#name').val(),
+							ver:$('#ver').val(),
+							description:$('#description').val()
+						},
+						success:function(data){
+							//$.messager.alert('prompt',  JSON.stringify(data));
+							$('#list_app').datagrid('reload');
+							$('#dlg_app').dialog('close');
+						}
+					}
+			);
+
 		}else{
 			if( $('#form_app').form('validate') ==false){
 				alert('data error');

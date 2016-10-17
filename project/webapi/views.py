@@ -194,23 +194,26 @@ class SheetViewSet(ModelViewSet):
 
 
 	def create(self, request, *args, **kwargs):
-		module = Module.objects.get(id = request.data.get('module_id'))
-		doc = ApiDoc()
-		doc.module = module
-		doc.name = request.data.get('name')
-		doc.ver = request.data.get('ver')
-		doc.description = request.data.get('description')
-		doc.url = request.data.get('url')
-		doc.method = request.data.get('method')
-		doc.comment = request.data.get('comment')
-		doc.headers = json.dumps( request.data.get('headers'))
-		doc.paramters = json.dumps( request.data.get('parameters'))
-		doc.resp_status = request.data.get('resp_status')
-		doc.resp_headers =json.dumps( request.data.get('resp_headers'))
-		doc.resp_data = json.dumps( request.data.get('resp_data'))
-		doc.save()
+		try:
+			module = Module.objects.get(id = request.data.get('module_id'))
+			doc = ApiDoc()
+			doc.module = module
+			doc.name = request.data.get('name')
+			doc.ver = request.data.get('ver')
+			doc.description = request.data.get('description')
+			doc.url = request.data.get('url')
+			doc.method = request.data.get('method')
+			doc.comment = request.data.get('comment')
+			doc.headers = json.dumps( request.data.get('headers'))
+			doc.paramters = json.dumps( request.data.get('parameters'))
+			doc.resp_status = request.data.get('resp_status')
+			doc.resp_headers =json.dumps( request.data.get('resp_headers'))
+			doc.resp_data = json.dumps( request.data.get('resp_data'))
+			doc.save()
 
-		return SuccCallReturn().assign(doc.id).httpResponse()
+			return SuccCallReturn().assign(doc.id).httpResponse()
+		except:
+			traceback.print_exc()
 
 	def update(self, request, *args, **kwargs):
 		doc = self.get_object()

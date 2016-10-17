@@ -280,17 +280,17 @@
 
 	//-------------------------
 	//var sheet = $('#dlg_sheet').data('sheet');
-	$('#list_req_header').datagrid().datagrid('enableCellEditing');
-	$('#list_resp_header').datagrid().datagrid('enableCellEditing');
+	$('#form_sheet #list_req_header').datagrid().datagrid('enableCellEditing');
+	$('#form_sheet #list_resp_header').datagrid().datagrid('enableCellEditing');
 
 
-	$('#list_req_parameter').treegrid().treegrid('enableCellEditing');
-	$('#list_resp_parameter').treegrid().treegrid('enableCellEditing');
+	$('#form_sheet #list_req_parameter').treegrid().treegrid('enableCellEditing');
+	$('#form_sheet #list_resp_parameter').treegrid().treegrid('enableCellEditing');
 
 
 	function  init_new_data(){
 
-		$('#list_resp_parameter').treegrid({
+		$('#form_sheet #list_resp_parameter').treegrid({
 			 url:'/static/webapi/new_resp_data.json'
 		});
 
@@ -327,7 +327,7 @@
 				    "name": "result"
 				}];
 		*/
-		$('#list_resp_parameter').treegrid('loadData', rows);
+		$('#form_sheet #list_resp_parameter').treegrid('loadData', rows);
 
 	}
 
@@ -340,12 +340,12 @@
 
 
 	$('#btn_sheet_req_header_new').click(function(){
-		$('#list_req_header').datagrid('appendRow',{id:UUID(),name:' undefined'});
+		$('#form_sheet #list_req_header').datagrid('appendRow',{id:UUID(),name:' undefined'});
 		onDataChanged();
 	});
 
 	$('#btn_sheet_req_header_del').click(function(){
-		var dg = $('#list_req_header').datagrid();
+		var dg = $('#form_sheet #list_req_header').datagrid();
 		var row = dg.datagrid('getSelected');
 		if( row == undefined){
 			alert("please select one  node!");
@@ -358,7 +358,7 @@
 
 
 	$('#btn_sheet_req_param_new').click(function(){
-		$('#list_req_parameter').treegrid('append',{
+		$('#form_sheet #list_req_parameter').treegrid('append',{
 			parent:null,
 			data:[
 				{name:'undefined',id:UUID(),"type":"string","default":""},
@@ -368,15 +368,15 @@
 	});
 
 	$('#btn_sheet_req_param_newsub').click(function(){
-		$('#list_req_parameter').treegrid('stopCellEditing');
+		$('#form_sheet #list_req_parameter').treegrid('stopCellEditing');
 
 
-		var node = $('#list_req_parameter').treegrid('getSelected');
+		var node = $('#form_sheet #list_req_parameter').treegrid('getSelected');
 		if(node == undefined){
 			alert("please select one parent node!");
 			return ;
 		}
-		$('#list_req_parameter').treegrid('append',
+		$('#form_sheet #list_req_parameter').treegrid('append',
 				{
 					parent:node.id,
 					data:[
@@ -387,11 +387,11 @@
 	});
 
 	$('#btn_sheet_req_param_del').click(function(){
-		var node = $('#list_req_parameter').treegrid('getSelected');
+		var node = $('#form_sheet #list_req_parameter').treegrid('getSelected');
 		if(node == undefined){
 			return ;
 		}
-		$('#list_req_parameter').treegrid('remove',node.id);
+		$('#form_sheet #list_req_parameter').treegrid('remove',node.id);
 		onDataChanged();
 	});
 
@@ -400,24 +400,24 @@
 	// begin response
 
 	$('#btn_sheet_resp_header_new').click(function(){
-		$('#list_resp_header').datagrid('appendRow',{id:UUID(),name:' undefined'});
+		$('#form_sheet #list_resp_header').datagrid('appendRow',{id:UUID(),name:' undefined'});
 		onDataChanged();
 	});
 
 	$('#btn_sheet_resp_header_del').click(function(){
-		var dg = $('#list_resp_header').datagrid();
-		var row = $('#list_resp_header').datagrid('getSelected');
+		var dg = $('#form_sheet #list_resp_header').datagrid();
+		var row = $('#form_sheet #list_resp_header').datagrid('getSelected');
 		if( row == undefined){
 			return ;
 		}
-		var index = $('#list_resp_header').datagrid('getRowIndex',row);
-		$('#list_resp_header').datagrid('deleteRow',index);
+		var index = $('#form_sheet #list_resp_header').datagrid('getRowIndex',row);
+		$('#form_sheet #list_resp_header').datagrid('deleteRow',index);
 		onDataChanged();
 	});
 
 
 	$('#btn_sheet_resp_param_new').click(function(){
-		$('#list_resp_parameter').treegrid('append',{
+		$('#form_sheet #list_resp_parameter').treegrid('append',{
 			parent:null,
 			data:[
 				{name:'undefined',id:UUID(),"type":"string","default":""},
@@ -427,14 +427,14 @@
 	});
 
 	$('#btn_sheet_resp_param_newsub').click(function(){
-		$('#list_resp_parameter').treegrid('stopCellEditing');
-		var node =  $('#list_resp_parameter').treegrid('getSelected');
+		$('#form_sheet #list_resp_parameter').treegrid('stopCellEditing');
+		var node =  $('#form_sheet #list_resp_parameter').treegrid('getSelected');
 		if(node == undefined){
 			alert("please select one parent node!");
 			return ;
 		}
 
-		 $('#list_resp_parameter').treegrid('append',
+		 $('#form_sheet #list_resp_parameter').treegrid('append',
 			{
 				parent:node.id,
 				data:[
@@ -446,24 +446,24 @@
 
 	$('#btn_sheet_resp_param_del').click(function(){
 
-		var node =$('#list_resp_parameter').treegrid('getSelected');
+		var node =$('#form_sheet #list_resp_parameter').treegrid('getSelected');
 		if(node == undefined){
 			alert('select one row');
 			return ;
 		}
-		$('#list_resp_parameter').treegrid('remove',node.id);
+		$('#form_sheet #list_resp_parameter').treegrid('remove',node.id);
 		onDataChanged();
 	});
 
 	function example_curl(){
-		var data_req_headers = $('#list_req_header').datagrid('getData').rows;
-		var data_req_parameters = $('#list_req_parameter').treegrid('getData');
+		var data_req_headers = $('#form_sheet #list_req_header').datagrid('getData').rows;
+		var data_req_parameters = $('#form_sheet #list_req_parameter').treegrid('getData');
 
-		var data_resp_headers = $('#list_resp_header').datagrid('getData').rows;
-		var data_resp_parameters = $('#list_resp_parameter').treegrid('getData');
+		var data_resp_headers = $('#form_sheet #list_resp_header').datagrid('getData').rows;
+		var data_resp_parameters = $('#form_sheet #list_resp_parameter').treegrid('getData');
 
 		var url = "http://127.0.0.1:8000/"+ $('#url').val();
-		var method =  $('#method').val().toUpperCase();
+		var method =  $('#form_sheet #method').val().toUpperCase();
 		var text = "curl -X " + method;
 
 		var data = data_req_parameters.map(function(_){
@@ -490,7 +490,7 @@
 	}
 
 	function onDataChanged(){
-		$('#examples').textbox('setValue',example_curl());
+		$('#form_sheet #examples').textbox('setValue',example_curl());
 
 	}
 
@@ -498,20 +498,22 @@
 	 * 	 * @param content
      */
 	function load_sheet_content(content){
-		$('#name').textbox('setValue',content.name);
-		$('#ver').textbox('setValue',content.ver);
-		$('#url').textbox('setValue',content.url);
-		$('#method').combobox('setValue',content.method);
-		$('#description').textbox('setValue',content.description);
-		$('#comment').textbox('setValue',content.comment);
-		$('#examples').textbox('setValue',content.examples);
+		$.messager.alert('warning',JSON.stringify(content));
 
-		$('#list_req_header').datagrid('loadData',JSON.parse( content.headers) );
-		$('#list_resp_header').datagrid('loadData',JSON.parse( content.resp_headers) );
+		$('#form_sheet #name').textbox('setValue',content.name);
+		$('#form_sheet #ver').textbox('setValue',content.ver);
+		$('#form_sheet #url').textbox('setValue',content.url);
+		$('#form_sheet #method').combobox('setValue',content.method);
+		$('#form_sheet #description').textbox('setValue',content.description);
+		$('#form_sheet #comment').textbox('setValue',content.comment);
+		$('#form_sheet #examples').textbox('setValue',content.examples);
 
-		$('#list_req_parameter').treegrid('loadData',JSON.parse( content.paramters) );
-		$('#list_resp_parameter').treegrid('loadData',JSON.parse( content.resp_data) );
-		$('#resp_status').combobox('setValue',content.resp_status);
+		$('#form_sheet #list_req_header').datagrid('loadData',JSON.parse( content.headers) );
+		$('#form_sheet #list_resp_header').datagrid('loadData',JSON.parse( content.resp_headers) );
+
+		$('#form_sheet #list_req_parameter').treegrid('loadData',JSON.parse( content.paramters) );
+		$('#form_sheet #list_resp_parameter').treegrid('loadData',JSON.parse( content.resp_data) );
+		$('#form_sheet #resp_status').combobox('setValue',content.resp_status);
 
 
 	}
@@ -553,27 +555,27 @@
 			return;
 		}
 
-		var data_req_headers = $('#list_req_header').datagrid('getData').rows;
-		var data_req_parameters = $('#list_req_parameter').treegrid('getData');
+		var data_req_headers = $('#form_sheet #list_req_header').datagrid('getData').rows;
+		var data_req_parameters = $('#form_sheet #list_req_parameter').treegrid('getData');
 
-		var data_resp_headers = $('#list_resp_header').datagrid('getData').rows;
-		var data_resp_parameters = $('#list_resp_parameter').treegrid('getData');
+		var data_resp_headers = $('#form_sheet #list_resp_header').datagrid('getData').rows;
+		var data_resp_parameters = $('#form_sheet #list_resp_parameter').treegrid('getData');
 
 		var valid_data ={
-							name: $('#name').val(),
-							ver: $('#ver').val(),
-							url:$('#url').val(),
-							method:$('#method').combobox('getValue'),
-							description: $('#description').val(),
-							comment: $('#comment').val(),
+							name: $('#form_sheet #name').val(),
+							ver: $('#form_sheet #ver').val(),
+							url:$('#form_sheet #url').val(),
+							method:$('#form_sheet #method').combobox('getValue'),
+							description: $('#form_sheet #description').val(),
+							comment: $('#form_sheet #comment').val(),
 							headers: data_req_headers,
 							parameters: data_req_parameters,
 
-							resp_status: $('#resp_status').combobox('getValue'),
+							resp_status: $('#form_sheet #resp_status').combobox('getValue'),
 							resp_headers: data_resp_headers,
 							resp_data: data_resp_parameters
 							,
-							examples: $('#examples').val()
+							examples: $('#form_sheet #examples').val()
 						};
 
 		//$.messager.alert('warning', JSON.stringify(valid_data) );
