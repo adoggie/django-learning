@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+import rest_framework
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
@@ -34,5 +35,6 @@ urlpatterns = [
 	url(r'^main/$',login_required(TemplateView.as_view(template_name='webapi/mainwindow.html'),),name='webapi-main'),
 
 ]
+
 
 urlpatterns += router.urls

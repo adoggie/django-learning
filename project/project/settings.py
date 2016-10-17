@@ -15,6 +15,8 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import rest_framework
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
     'Jomo',
     'DevOps',
     'rest_framework',
+    'rest_framework.authtoken',
     'webapi',
     # 'rest_framework.authentication.SessionAuthentication'
 ]
@@ -187,6 +190,7 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 100,
     'DEFAULT_AUTHENTICATION_CLASSES': (
         # 'rest_framework.authentication.SessionAuthentication', #启动此认证方式，将自动开启 中间件 'django.middleware.csrf.CsrfViewMiddleware',
+        'rest_framework.authentication.TokenAuthentication',
     )
 }
 
