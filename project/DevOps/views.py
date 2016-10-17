@@ -17,8 +17,9 @@ from django.views.generic.list import ListView
 tool_app_list=[
 	{'name':u'my_ip','comment':u'查询您的互联网IP地址','url':'tool-myip'},
 	{'name':u'urlencode','comment':u'url路径解析','url':'tool-urlencode'},
-	{'name':u'hash CODE','comment':u'哈希编码 MD5,Rainbow-Table,SHA1,SHA256','url':'tool-hash'},
-	{'name':u'base64E','comment':u'Base64','url':'tool-base64'},
+	{'name':u'hash toolset','comment':u'哈希编码 MD5,Rainbow-Table,SHA1,SHA256','url':'tool-hash'},
+	{'name':u'base64','comment':u'Base64','url':'tool-base64'},
+	{'name':u'webapi Maker','comment':u'WebApi Maker','url':'webapi-main'},
 ]
 
 

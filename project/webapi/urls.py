@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
 
 from rest_framework.routers import SimpleRouter
@@ -30,7 +31,8 @@ urlpatterns = [
     # url(r'^applications/$', RedisTestView.as_view(),name='applications'),
     # url(r'^applications/$', RedisTestView.as_view(),name='applications'),
     # url(r'^applications/(?P<pk>[0-9]{1,10})/modules/$', RedisTestView.as_view(),name='applications'),
-	url(r'^main/$',TemplateView.as_view(template_name='webapi/mainwindow.html'),name='mainwindow'),
+	url(r'^main/$',login_required(TemplateView.as_view(template_name='webapi/mainwindow.html'),),name='webapi-main'),
+
 ]
 
 urlpatterns += router.urls

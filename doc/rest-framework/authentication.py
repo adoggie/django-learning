@@ -73,7 +73,16 @@ def example_view(request, format=None):
 """
 
 
+"""
+奇怪问题：
+  django 的auth完成用户登录，request.user设置为 User对象
+  但在随后DRF接口调用时，drf的request.user是AnonymousUser对象，查看rest_framework.views.Request代码，将__init__()的
+   "self.authenticators = authenticators or ()" 注释掉，居然就好了，request.user就是之前login的User对象了。
+   没找到 Request对象的成员变量创建和赋值的地方(._user) , 代码太诡异了
 
+   python代码太松散了，可读性，维护性太差了，怀疑 django-restframework代码与python和django的兼容性。
+
+"""
 
 
 

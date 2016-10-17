@@ -73,7 +73,7 @@ class ApplicationViewSet(ModelViewSet):
 	queryset = Application.objects.all()
 	pagination_class = EasyUiPagination
 	parser_classes = (FormParser,)
-
+	# authentication_classes = (SessionAuthentication,)
 	def get_queryset(self):
 		get_token(self.request)
 		rs = Application.objects.all().order_by('name')
@@ -85,7 +85,7 @@ class ApplicationViewSet(ModelViewSet):
 		if not ser.is_valid():
 			return Response({'status':1})
 		app = Application(**ser.validated_data)
-		app.user = User.objects.get(id=1)
+		app.user = request.user # User.objects.get(id=1)
 		app.create_date = datetime.datetime.now().date()
 		app.save()
 		# app = ser.save()
