@@ -23,6 +23,7 @@ from rest_framework.viewsets import ViewSet, ModelViewSet
 from webapi.models import Application, Module, ApiDoc, DocumentResponse
 
 from httputil import SuccCallReturn,FailCallReturn
+from .exp_markdown import markdown_html
 
 class EasyUiPagination(PageNumberPagination):
 	# page_size = 10  # 真正的page_size由easyui.paginator传递过来
@@ -230,3 +231,15 @@ class SheetViewSet(ModelViewSet):
 		doc.resp_data = json.dumps( request.data.get('resp_data'))
 		doc.save()
 		return SuccCallReturn().httpResponse()
+
+	@list_route(methods=['post'])
+	def markdown(self,request):
+		# import pdfkit
+		try:
+			doc_ids = request.data
+			html = markdown_html(doc_ids)
+			# print html
+			# pdfkit.from_string(html, 'out.pdf')
+			return Response(html)
+		except:
+			traceback.print_exc()

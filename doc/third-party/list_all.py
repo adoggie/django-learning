@@ -26,4 +26,13 @@ https://github.com/tomchristie/django-rest-framework/
 
 djangorestframework-xml
 
+pip install pdfkit
+pip install wkhtmltopdf
+pip install markdown2pdf
+
+
+http://wkhtmltopdf.org/
+
+
+
 

@@ -75,6 +75,42 @@ $(function() {
 
 	});
 
+	$('#btn_sheet_export').click(function(){
+		var selitems = $('#list_sheet').datagrid('getSelections');
+		if( selitems.length ==0 ) {
+			$.messager.alert('warning','please select one sheet row!');
+			return ;
+		}
+
+		var ids = [];
+		ids = selitems.map( function(x){
+			return x.id;
+		});
+
+		//alert(JSON.stringify(ids));
+		$.ajax({
+			url:'/webapi/sheets/markdown/',
+			method:'post',
+			data:JSON.stringify(ids),
+			dataType: 'json',
+			contentType: 'application/json',
+			success:function(data){
+				//$.messager.alert('warning',data);
+				data = '<div style="padding:20px 20px">' + data +'</div>'
+				$('#tabs_content').tabs('add',{
+						title:'api doc',
+						selected:true,
+						id: UUID(),
+						content: data,
+						closable: true,
+				});
+			},
+			error:function(xhr,status,error){
+				$.messager.alert('error',status + error);
+			}
+		});
+
+	});
 
 
 
