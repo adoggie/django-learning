@@ -1,3 +1,10 @@
+
+
+查看某个进程占用的CPU资源
+
+$  while :; do ps -eo pid,ni,pri,pcpu,psr,comm | grep 'test_command'; sleep 1; done
+  PID  NI PRI %CPU PSR COMMAND 
+  
 监控网络带宽:
     监控总体带宽使用――nload、bmon、slurm、bwm-ng、cbm、speedometer和netload
     监控总体带宽使用（批量式输出）――vnstat、ifstat、dstat和collectl
@@ -7,3 +14,11 @@
  yum install -y nload vnstat iftop 
  
  cpuid, htop ,sl , tmux 
+
+iotop 查看io使用
+
+iostat -d -k 2
+参数 -d 表示，显示设备（磁盘）使用状态；-k某些使用block为单位的列强制使用Kilobytes为单位；2表示，数据显示每隔2秒刷新一次。
+iostat -d -k 1 10         #查看TPS和吞吐量信息(磁盘读写速度单位为KB)
+iostat -d -m 2            #查看TPS和吞吐量信息(磁盘读写速度单位为MB)
+iostat -d -x -k 1 10      #查看设备使用率（%util）、响应时间（await） iostat -c 1 10 #查看cpu状态
