@@ -13,7 +13,10 @@ $  while :; do ps -eo pid,ni,pri,pcpu,psr,comm | grep 'test_command'; sleep 1; d
     
  yum install -y nload vnstat iftop 
  
- cpuid, htop ,sl , tmux 
+nmon
+--------------
+http://nmon.sourceforge.net/pmwiki.php?n=Site.Download
+
 
 iotop 查看io使用
 
@@ -22,3 +25,15 @@ iostat -d -k 2
 iostat -d -k 1 10         #查看TPS和吞吐量信息(磁盘读写速度单位为KB)
 iostat -d -m 2            #查看TPS和吞吐量信息(磁盘读写速度单位为MB)
 iostat -d -x -k 1 10      #查看设备使用率（%util）、响应时间（await） iostat -c 1 10 #查看cpu状态
+
+yum 常用工具
+---------------------
+yum clean all; 
+yum install epel-release 
+yum makecache 
+
+ cpuid, htop ,sl , tmux ,sshfs 
+ tigervnc-server tigervnc wget curl  python-pip nmap 
+ 
+ 
+ 
