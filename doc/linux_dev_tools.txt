@@ -11,7 +11,7 @@ $  while :; do ps -eo pid,ni,pri,pcpu,psr,comm | grep 'test_command'; sleep 1; d
     每个套接字连接的带宽使用――iftop、iptraf、tcptrack、pktstat、netwatch和trafshow
     每个进程的带宽使用――nethogs
     
- yum install -y nload vnstat iftop 
+ yum install -y nload vnstat iftop shellinabox
  
 nmon
 --------------
