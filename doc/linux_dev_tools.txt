@@ -49,5 +49,8 @@ yum makecache
  cpuid, htop ,sl , tmux ,sshfs 
  tigervnc-server tigervnc wget curl  python-pip nmap 
  
+ drupal
+ ----------
+ drush 
  
  
