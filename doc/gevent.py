@@ -1,6 +1,6 @@
 	
   
-  def run(self):
+def run(self):
 		from multiprocessing import Process
 		self.init(init_script.GLOBAL_SETTINGS_FILE, init_script.GLOBAL_SERVICE_FILE)
 
@@ -25,3 +25,4 @@
 
 		for _ in xrange(forks):
 			Process( target=_exec,args = (wsgi_server,)).start()
+ 
