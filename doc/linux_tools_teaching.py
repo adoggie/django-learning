@@ -45,34 +45,42 @@ echo / touch / source / export
 getconf LONG_BIT
 cat /etc/release-***
 hostname / hostnamectl / uname -a / ulimit /sysctl -a 
+useradd / passwd 
+chown / chgrp / chmod
 
 
 
 
-1. top /htop / free -m / df / du 
+1. top /htop / free -m / df / du / ps -e -opid,pcpu,comm|sort -n +1
 2. vi/vim/nano/less/emacs
    ".vimrc "
 3. wget/curl 
-4. setsid / nohup / > dev/null 2>&1
+4. setsid / nohup / > dev/null 2>&1 / jobs / fg/bg 
 5. tmux / screen 
 6. nc -l xxxx / nmap / netstat -an / lsof -i:8080 
-7. strings / tail -nf / head / watch -nd
+7. strings / tail -nf / head / watch / wc / cat 
 8. awk / sed / tr 
 9. pkill / pgrep / kill / ps 
-10.grep / find / xargs -l {}
-11. ssh / scp / sshfs 
-12. samba / nfs 
+10.grep / find / xargs -l {} /
+11. ssh / scp / sshfs / samba / nfs 
+12. tar / bzip / xy / zip / dd 
 13. http server :  httpd / nginx / mongoose / python -m SimpleHTTPServer 8080 
-14. iptables: 
-     service iptables start | stop | restart
+14. iptables / selinux
 15. rsync -rvat  src dest 
-16. cron  (crontab -e) 
+16. cron / ntpd
+   (crontab -e)    /etc/crontab
+   service crond start
 17. svn / svnserve / 
 18. vnc-server 
    yum install tigervnc-server 
    vncserver --geometry 600x450 
    vncviewer xxxxx:1 
 19. webssh : shellinaboxd 
+
+20. seq -s \  10 20 |  
+    echo "xxx" | md5sum -b 
+    echo "abc" | base64 | base64 -d 
+      
    
    
    
@@ -90,7 +98,8 @@ System Configurations:
 /etc/hosts
 /etc/hostname
 /etc/release-***
-
+/etc/network-scripts/ifcfg-eth0 
+/dev/shm/
 
 
 Pythons
