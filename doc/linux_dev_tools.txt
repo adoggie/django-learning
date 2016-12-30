@@ -30,6 +30,7 @@ iperf -c ceph-osd0
 Benchmark tool: 
 COSBench https://github.com/intel-cloud/cosbench
 
+http://man.linuxde.net/
 
 
 iotop 查看io使用
