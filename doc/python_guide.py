@@ -31,7 +31,7 @@ python简介
 语法介绍   
 helloworld
 
-面向过程和对象  内建函数
+面向过程和对象  内建函数 模块级函数 类级函数 对象函数
 
 关键字 
 False      class        finally      is           return
