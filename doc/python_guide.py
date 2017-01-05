@@ -70,6 +70,8 @@ class self inherit super @staticmethod object
 has_attr set_attr
 
 对象内建函数 init getitem str
+重载： http://www.cnblogs.com/wjoyxt/p/5112537.html
+  
 数据库访问 
     dbi https://www.python.org/dev/peps/pep-0249/
     psycopg  http://initd.org/psycopg/
