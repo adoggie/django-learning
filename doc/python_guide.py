@@ -70,7 +70,16 @@ class self inherit super @staticmethod object
 has_attr set_attr
 
 对象内建函数 init getitem str
-
+数据库访问 
+    dbi https://www.python.org/dev/peps/pep-0249/
+    psycopg  http://initd.org/psycopg/
+      conn = psycopg2.connect(dbname,user, password)
+      cusor
+      to see : http://www.cnblogs.com/yy3b2007com/p/5724427.html
+    sqlite3
+      http://www.runoob.com/sqlite/sqlite-python.html
+      connect(path) connect("memory:")
+    
 docstring helpdoc
   sphinx : yum install python-sphinx     sphinx-quickstart
   pyment: https://github.com/dadadel/pyment   
