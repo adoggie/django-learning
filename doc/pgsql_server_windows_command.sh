@@ -8,7 +8,7 @@ psql -U postgres
 
 alter user postgres with password '111111'
 
-add entry into pg_hba.conf ( 0.0.0.0/0 md5)
+add entry edit pg_hba.conf ( 0.0.0.0/0 md5)
 
 edit postgresql.conf   ( listen_address="*")
 
