@@ -21,6 +21,8 @@ python简介
 实现版本 cpython
 
 安装 pip 市场pypi download
+  wget https://bootstrap.pypa.io/get-pip.py
+    
 
 运行 idel，ipython，pycharm os运行差异
 
