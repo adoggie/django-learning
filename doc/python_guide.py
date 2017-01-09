@@ -25,7 +25,14 @@ python简介
     
 
 运行 idel，ipython，pycharm os运行差异
-
+   ipython cmd(? ?? *  %run cmd ) 
+   ipython qtconsole --pylab=inline
+   pip install qtconsole 
+   ipython --pylab
+    ipython notebook
+   最近的两个输出结果保存在_(一个下划线)和__(两个下划线)变量中
+   !cmd 执行系统命令
+               
 帮助系统 pydoc
 
 文件形式: py pyc pyo pyw pyd
