@@ -113,4 +113,5 @@ pyqt   https://github.com/adoggie/vlc_player/blob/master/video_player.pyw
 gevent
 django
 numpy
-scrapy  
+scrapy
+py4j - 实现python与java之间互相调用 
