@@ -135,6 +135,11 @@ pip / easy_install / requiments.txt
 virtualenv 
 
 
+字符集转换
+----------
+chardetect filename 
+iconv -f GB2312 -t UTF-8 a.txt > aa.txt 
+
 
 
 
