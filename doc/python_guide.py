@@ -115,3 +115,4 @@ django
 numpy
 scrapy
 py4j - 实现python与java之间互相调用 
+chardet - 字符集检测
