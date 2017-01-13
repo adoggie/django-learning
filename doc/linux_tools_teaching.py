@@ -140,6 +140,15 @@ virtualenv
 chardetect filename 
 iconv -f GB2312 -t UTF-8 a.txt > aa.txt 
 
+shell tools
+-------------
+cygwin - cygwin.org 
+mingw  - mingw.org 
+Babun - a windows shell,  http://babun.github.io/  
+      包管理  pack --help 
+       pact install tmux 
+         
+
 
 
 
