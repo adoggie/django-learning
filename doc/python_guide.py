@@ -115,9 +115,10 @@ django
 numpy
 scrapy
 py4j - 实现python与java之间互相调用 
-chardet - 字符集检测
+chardet - 字符集检测  
+  "iconv -f GB2312 -t UTF-8 xxx.txt "  " chardetect.py xxx.txt"
 
 微服务
 --------
-connexion    - https://pypi.python.org/pypi/connexion  基于配置的微型service app， 基本实现功能在djangoframework中都覆盖了。 
+connexion    - "https://pypi.python.org/pypi/connexion  基于配置的微型service app， 基本实现功能在djangoframework中都覆盖了。 "
   
