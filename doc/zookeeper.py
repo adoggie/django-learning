@@ -42,7 +42,7 @@ https://github.com/stfp/zkpython
   Watches EVents:  Created,Deleted,Changed,Child
   ACLs - 访问控制列表(Permissions) : CREATE,READ,WRITE,DELETE,ADMIN
     
-  ? 考虑Nginx反向代理服务器集群地址从zookeeper获取
+ ? - 考虑Nginx反向代理服务器集群地址从zookeeper获取
   
   
   
