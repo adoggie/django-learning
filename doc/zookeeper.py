@@ -30,3 +30,9 @@ https://github.com/stfp/zkpython
   pycharm IDE中安装插件
   zookeeper , mongodb
   
+
+  编程指南：
+    http://zookeeper.apache.org/doc/r3.5.0-alpha/zookeeperProgrammers.html
+    
+  Ephemeral Node - 临时节点
+  
