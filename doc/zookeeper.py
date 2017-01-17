@@ -4,6 +4,8 @@
 
 zkServer  start/start-foreground / stop 
 zkCli  
+zkCli.sh -server 127.0.0.1:2181
+  
 >connect localhost:port
 
 >telnet  localhost:port 
