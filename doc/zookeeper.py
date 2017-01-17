@@ -24,5 +24,7 @@ pip install zkpython
 https://github.com/stfp/zkpython
 
   
-图形管理接口 :  pycharm IDE中安装 zookeeper插件
+图形管理接口 :  
+  pycharm IDE中安装插件
+  zookeeper , mongodb
   
