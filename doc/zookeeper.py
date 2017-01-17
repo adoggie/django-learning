@@ -34,5 +34,15 @@ https://github.com/stfp/zkpython
   编程指南：
     http://zookeeper.apache.org/doc/r3.5.0-alpha/zookeeperProgrammers.html
     
-  Ephemeral Node - 临时节点
+  Ephemeral Node - 临时节点  
+  EPHEMERAL_SEQUENTIAL-临时顺序编号目录节点 
+  PERSISTENT-持久化目录节点 
+  PERSISTENT_SEQUENTIAL-持久化顺序编号目录节点
+  
+  Watches EVents:  Created,Deleted,Changed,Child
+  ACLs - 访问控制列表(Permissions) : CREATE,READ,WRITE,DELETE,ADMIN
+    
+  ? 考虑Nginx反向代理服务器集群地址从zookeeper获取
+  
+  
   
