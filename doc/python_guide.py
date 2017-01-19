@@ -118,7 +118,9 @@ py4j - 实现python与java之间互相调用
 pyjnius - python调用java类，据说优于py4j，目前没感觉到！
 chardet - 字符集检测  
   "iconv -f GB2312 -t UTF-8 xxx.txt "  " chardetect.py xxx.txt"
+paramiko - ssh 自动化
 
+  
 微服务
 --------
 connexion    - "https://pypi.python.org/pypi/connexion  基于配置的微型service app， 基本实现功能在djangoframework中都覆盖了。 "
