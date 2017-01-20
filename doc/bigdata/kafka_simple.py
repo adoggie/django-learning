@@ -1,7 +1,6 @@
 
 启动zookeeper and kafka-server
-
-‘’‘’
+"""
 bin/zookeeper-server-start.sh config/zookeeper.properties
 bin/kafka-server-start.sh config/server.properties
 
@@ -20,7 +19,7 @@ bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
  修改 server.properties
       listeners=PLAINTEXT://localhost:9092  
    
-  ‘’‘’
+ """
   
    
    
