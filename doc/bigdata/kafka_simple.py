@@ -33,6 +33,9 @@ master/slave模式用于备份和主备服务，通过监听服务节点的变�
 
 producer直接连接broker发布消息，consumer连接zookeeper读取消息。 
 
+pykafka : 
+   http://pykafka.readthedocs.org/
+
 """
   
    
