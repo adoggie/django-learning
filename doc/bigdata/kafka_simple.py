@@ -20,6 +20,14 @@ bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
       listeners=PLAINTEXT://localhost:9092  
    
  """
+
+"""
+master/slave模式用于备份和主备服务，通过监听服务节点的变动，来设置那些slave节点为master节点。 （最小序号、选举法)
+一个partition对应一个consumer ，一个consumer组group内多个consumer可以实现负载均衡，多个group内的consumer实现广播接收。 
+
+producer直接连接broker发布消息，consumer连接zookeeper读取消息。 
+
+"""
   
    
    
