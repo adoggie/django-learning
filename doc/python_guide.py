@@ -119,7 +119,8 @@ pyjnius - python调用java类，据说优于py4j，目前没感觉到！
 chardet - 字符集检测  
   "iconv -f GB2312 -t UTF-8 xxx.txt "  " chardetect.py xxx.txt"
 paramiko - ssh 自动化
-
+pykafka
+zkpython 
   
 微服务
 --------
