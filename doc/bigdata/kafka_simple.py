@@ -18,7 +18,13 @@ bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
  
  修改 server.properties
       listeners=PLAINTEXT://localhost:9092  
-   
+  
+  
+ 彻底删除topic：
+ 1.删除kafka存储目录（server.properties文件log.dirs配置，默认为"/tmp/kafka-logs"）相关topic目录
+ 2.如果配置了delete.topic.enable=true直接通过命令删除，如果命令删除不掉，直接通过zookeeper-client 删除掉broker下的topic即可。
+ 标记为marked for deletion的topic你可以在zookeeper客户端中通过命令获得：ls /admin/delete_topics/【topic name】
+ 
  """
 
 """
