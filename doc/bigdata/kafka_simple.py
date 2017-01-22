@@ -36,6 +36,20 @@ producer直接连接broker发布消息，consumer连接zookeeper读取消息。
 pykafka : 
    http://pykafka.readthedocs.org/
 
+simple_consumer / balanced_consumer 
+
+  cs = tp.get_balanced_consumer(
+   consumer_group='abc',
+   auto_commit_enable=True,
+   zookeeper_connect='192.168.199.41:2181'
+  )
+  
+  balanced_consumer用于负载均衡，多个kafka客户依次读取同一个topic的消息，partition的数量必须大于topic的读取用户数量。 
+  balanced读取方式必须指定相同的group名称，如果group不同，则topic消息被广播到读取客户。 
+  
+  当topic的partition数量小于消息读取者时，后者读取进程将顶掉前者读取进程的连接。 
+  
+
 """
   
    
