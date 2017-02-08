@@ -121,7 +121,9 @@ chardet - 字符集检测
 paramiko - ssh 自动化
 pykafka
 zkpython 
-  
+pysal  - 地理空间计算库 
+numpy  - 数值计算
+scipy -  数值计算
 微服务
 --------
 connexion    - "https://pypi.python.org/pypi/connexion  基于配置的微型service app， 基本实现功能在djangoframework中都覆盖了。 "
