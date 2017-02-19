@@ -2,7 +2,8 @@
 https://docs.djangoproject.com/en/1.10/releases/
 https://www.djangoproject.com/download/
   
-
+django1.7 -> py2.7+ 
+  
 backwards-incompatible-1-7
 
 django 1.7 必须手动添加 .setup() ,否则出现"AppRegisterNotReady" 的错误
