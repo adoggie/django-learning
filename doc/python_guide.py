@@ -124,6 +124,9 @@ zkpython
 pysal  - 地理空间计算库 
 numpy  - 数值计算
 scipy -  数值计算
+celery - 异步rpc
+pep8.py - 代码规格检查
+
 微服务
 --------
 connexion    - "https://pypi.python.org/pypi/connexion  基于配置的微型service app， 基本实现功能在djangoframework中都覆盖了。 "
