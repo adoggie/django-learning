@@ -129,6 +129,8 @@ pep8.py - 代码规格检查
 pydot / pygraphviz / networkx / osg (社交网络有向图) http://networkx.github.io
 matplotlib.pyplot
 pyexcept
+poster / requests (http client)
+
 
 
 微服务
