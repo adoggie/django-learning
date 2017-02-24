@@ -126,6 +126,10 @@ numpy  - 数值计算
 scipy -  数值计算
 celery - 异步rpc
 pep8.py - 代码规格检查
+pydot / pygraphviz / networkx / osg (社交网络有向图) http://networkx.github.io
+matplotlib.pyplot
+pyexcept
+
 
 微服务
 --------
