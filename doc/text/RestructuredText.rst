@@ -14,6 +14,8 @@ http://rst.ninjs.org/  online editor
 
 https://pypi.python.org/pypi/watchdog
 
+http://www.sphinx-doc.org/en/stable/tutorial.html  sphinx 使用指南
+
 Packages
 --------
 pip install python-sphinx watchdog
