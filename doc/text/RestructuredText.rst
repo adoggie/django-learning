@@ -22,7 +22,7 @@ http://blog.useasp.net/archive/2014/09/05/rst-file-restructuredtext-markup-synta
 Packages
 --------
 pip install python-sphinx watchdog
-::
+
 
   watchmedo shell-command --command="sphinx-build doc build" .
 
