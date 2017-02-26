@@ -14,8 +14,7 @@ api-mock ./apiary.md --port 3000
 npm install -g drakov
 drakov -f apiary.md -p 3000
 
-**aglio"" 是一个可以根据 api-blueprint 的文档生成静态 HTML 页面的工具。
-
+**aglio** 是一个可以根据 api-blueprint 的文档生成静态 HTML 页面的工具
 ``npm install -g aglio
 aglio -i foo.md -o bar.html``
 
