@@ -22,9 +22,7 @@ aglio -i foo.md -o bar.html``
 Examaples
 --------
 
-``
-
-FORMAT: 1A
+``FORMAT: 1A
  # Example API
  hello world
   ## 消息 [/messages]
