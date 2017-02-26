@@ -30,5 +30,4 @@ Examaples
   + Response 200 (application/json)
       {
             "hello": "world"
-      }
-``
+      }``
