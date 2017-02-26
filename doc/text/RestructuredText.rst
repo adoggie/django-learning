@@ -15,5 +15,5 @@ Packages
 pip install python-sphinx watchdog
 ::
 
-watchmedo shell-command --command="sphinx-build doc build" .
+  watchmedo shell-command --command="sphinx-build doc build" .
 
