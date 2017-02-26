@@ -130,7 +130,8 @@ pydot / pygraphviz / networkx / osg (社交网络有向图) http://networkx.gith
 matplotlib.pyplot
 pyexcept
 poster / requests (http client)
-
+Docutils  rst格式转换
+Pygments  代码语法高亮
 
 
 微服务
