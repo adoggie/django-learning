@@ -16,6 +16,9 @@ https://pypi.python.org/pypi/watchdog
 
 http://www.sphinx-doc.org/en/stable/tutorial.html  sphinx 使用指南
 
+http://blog.useasp.net/archive/2014/09/05/rst-file-restructuredtext-markup-syntax-quikstart.aspx
+
+
 Packages
 --------
 pip install python-sphinx watchdog
