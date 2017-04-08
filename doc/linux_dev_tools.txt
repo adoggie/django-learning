@@ -65,3 +65,9 @@ yum makecache
  
 ssh 代理(正向代理) 
 ssh -CNL 9999:localhost:3306 zb@ytodev -p 8100
+
+测试工具
+-------------
+apache ab , benchmark
+https://httpd.apache.org/docs/2.4/programs/ab.html
+
