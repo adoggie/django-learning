@@ -54,4 +54,14 @@ yum makecache
  ----------
  drush 
  
+ shellinabox
+ -----------
+ yum install shellinabox
+ shellinaboxd -b -s :/SSH    启动https连接进入
+
+
+ ssh 正向代理
+ ------------
  
+ssh 代理(正向代理) 
+ssh -CNL 9999:localhost:3306 zb@ytodev -p 8100
