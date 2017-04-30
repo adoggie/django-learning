@@ -149,6 +149,15 @@ Babun - a windows shell,  http://babun.github.io/
        pact install tmux 
          
 
+vncserver
+-----------
+vncserver -geometry 1200x800 
+  -list 
+
+动态更改远程桌面的分辨率 ：  
+   vncviewer登录，执行 xrandr -s 0123456
+   xrandr 列出所有支持的分辨率
+   
 
 
 
