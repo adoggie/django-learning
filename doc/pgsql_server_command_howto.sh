@@ -2,6 +2,7 @@
 
 
 su - postgres -c " pg_ctl initdb -D /data/pgsql"
+su - postgres -c " pg_ctl  -D /var/lib/pgsql/9.4/data -l logfile start"
 su - postgres -c " pg_ctl start|stop|status -D /var/lib/pgsql/9.4/data"
 
 pg_ctl -D /data/pgsql -l logfile start
