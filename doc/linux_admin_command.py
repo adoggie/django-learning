@@ -1,3 +1,7 @@
+
+man.linuxde.net
+
+
 Postgresql
 -----------
 1. installation
@@ -158,6 +162,6 @@ vncserver -geometry 1200x800
    vncviewer登录，执行 xrandr -s 0123456
    xrandr 列出所有支持的分辨率
    
-
+xargs -I {} cat {}
 
 
