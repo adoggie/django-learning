@@ -134,6 +134,8 @@ Docutils  rst格式转换
 Pygments  代码语法高亮
 objgraph/pygraph  绘制有向图  objgraph.show_refs([c],filename='/tmp/test.png')
 
+mysql-connector   https://github.com/sanpingz/mysql-connector
+
 微服务
 --------
 connexion    - "https://pypi.python.org/pypi/connexion  基于配置的微型service app， 基本实现功能在djangoframework中都覆盖了。 "
