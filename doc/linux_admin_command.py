@@ -164,4 +164,5 @@ vncserver -geometry 1200x800
    
 xargs -I {} cat {}
 
-
+rysnc 拷贝排外
+rsync -av --progress ./backends/ /Users/scott/github/rhinoceros/code/backends/ --exclude '.svn' --exclude '.idea' --exclude '*.pyc'
