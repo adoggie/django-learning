@@ -133,7 +133,7 @@ poster / requests (http client)
 Docutils  rst格式转换
 Pygments  代码语法高亮
 objgraph/pygraph  绘制有向图  objgraph.show_refs([c],filename='/tmp/test.png')
-
+pandas   http://pandas.pydata.org/   数据分析包 
 mysql-connector   https://github.com/sanpingz/mysql-connector
 
   ogr gdal gis工具包 
