@@ -122,7 +122,7 @@ paramiko - ssh 自动化
 pykafka
 zkpython 
 pysal  - 地理空间计算库 
-numpy  - 数值计算
+numpy  - 数值计算    numpy,scipy,matplotlib 在centos7下无法用pip安装，直接 yum install numpy ...
 scipy -  数值计算
 celery - 异步rpc
 pep8.py - 代码规格检查
