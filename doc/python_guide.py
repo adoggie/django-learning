@@ -124,6 +124,7 @@ zkpython
 pysal  - 地理空间计算库 
 numpy  - 数值计算    numpy,scipy,matplotlib 在centos7下无法用pip安装，直接 yum install numpy 或者使用 virtualenv安装 ...
 scipy -  数值计算
+Plotly - 交互式图形化 数据 绘制， Plotly: a graphing library for making interactive, publication-quality graphs. See examples of statistic, scientific, 3D charts, and more here: https://plot.ly/python.
 celery - 异步rpc
 pep8.py - 代码规格检查
 pydot / pygraphviz / networkx / osg (社交网络有向图) http://networkx.github.io
