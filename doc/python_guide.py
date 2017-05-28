@@ -122,7 +122,7 @@ paramiko - ssh 自动化
 pykafka
 zkpython 
 pysal  - 地理空间计算库 
-numpy  - 数值计算    numpy,scipy,matplotlib 在centos7下无法用pip安装，直接 yum install numpy ...
+numpy  - 数值计算    numpy,scipy,matplotlib 在centos7下无法用pip安装，直接 yum install numpy 或者使用 virtualenv安装 ...
 scipy -  数值计算
 celery - 异步rpc
 pep8.py - 代码规格检查
@@ -137,11 +137,12 @@ objgraph/pygraph  绘制有向图  objgraph.show_refs([c],filename='/tmp/test.pn
 mysql-connector   https://github.com/sanpingz/mysql-connector
 
   ogr gdal gis工具包 
-  jupyter notebook  基于web的交互式学习环境 
-      pip install jupyter 
-    
-  利用 jupyter 进行绘图练习： 
-     http://matplotlib.org/ ，可通过%matplotlib inline 激活，（https://www.dataquest.io/blog/matplotlib-tutorial/） 
+  
+jupyter notebook  基于web的交互式学习环境 
+ pip install jupyter   
+  
+利用 jupyter 进行绘图练习： 
+  http://matplotlib.org/ ，可通过%matplotlib inline 激活，（https://www.dataquest.io/blog/matplotlib-tutorial/） 
 
 google python-fire :  pip install fire    函数与shell的集成 
   
