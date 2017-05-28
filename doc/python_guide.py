@@ -136,6 +136,17 @@ objgraph/pygraph  绘制有向图  objgraph.show_refs([c],filename='/tmp/test.pn
 
 mysql-connector   https://github.com/sanpingz/mysql-connector
 
+  ogr gdal gis工具包 
+  jupyter notebook  基于web的交互式学习环境 
+      pip install jupyter 
+    
+  利用 jupyter 进行绘图练习： 
+     http://matplotlib.org/ ，可通过%matplotlib inline 激活，（https://www.dataquest.io/blog/matplotlib-tutorial/） 
+
+google python-fire :  pip install fire    函数与shell的集成 
+  
+  
+
 微服务
 --------
 connexion    - "https://pypi.python.org/pypi/connexion  基于配置的微型service app， 基本实现功能在djangoframework中都覆盖了。 "
