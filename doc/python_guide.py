@@ -147,7 +147,8 @@ jupyter notebook  基于web的交互式学习环境
 
 google python-fire :  pip install fire    函数与shell的集成 
   
-  
+zeep - soap wsdl 服务 
+polygon - 多边形库绘制和计算   https://www.j-raedler.de/projects/polygon/
 
 微服务
 --------
