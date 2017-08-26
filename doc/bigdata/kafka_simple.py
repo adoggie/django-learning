@@ -1,4 +1,9 @@
 
+download & install
+=========
+http://kafka.apache.org/downloads
+ 
+
 启动zookeeper and kafka-server
 """
 bin/zookeeper-server-start.sh config/zookeeper.properties
