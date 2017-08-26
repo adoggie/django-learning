@@ -9,12 +9,25 @@ http://kafka.apache.org/downloads
 bin/zookeeper-server-start.sh config/zookeeper.properties
 bin/kafka-server-start.sh config/server.properties
 
+ports:
+  zookeeper 2181 
+  kafka 
+
+ -- partitions 数量必须大于 consumer数量 
+ -- 多个 consumer group 实现多播 ； consumer group中多个consumer实现单播
+ 
+ 一个topic分布在broker上存在1个或多个partition, consumer读取1个或多个partition的数据，不同partition的数据不能保持先后顺序，同一个partition的数据能
+ 保证读取的先后次序。
+ 
+ 
+
 
 创建topic
 bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test 
  查看topic
  bin/kafka-topics.sh --list --zookeeper localhost:2181
-  
+./kafka-topics.sh --describe --topic test --zookeeper localhost:2181  
+
 发送消息
 bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
  
