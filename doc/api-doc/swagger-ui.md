@@ -31,8 +31,10 @@ swigger的api套件：
   cp ../swagger-ui/dist ./
   npm install express --save
   
-  vim index.js 
-    
+vim index.js 
+
+```javascript
+
   var express = require('express');  
   var app = express();  
   app.use('/root', express.static('dist'));  
@@ -43,7 +45,9 @@ swigger的api套件：
   app.listen(3000, function () {  
     console.log('Example app listening on port 3000!');  
   });  
-  
+
+```
+
   启动 swigger-ui 
   node ./index.js   默认启动端口 3000 
   
