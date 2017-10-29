@@ -11,6 +11,11 @@ swigger的api套件：
 
 - swigger-ui 呈现api接口
 
+## 参考 reference
+
+https://swagger.io/specification/
+https://swagger.io/docs/specification/2-0/describing-parameters/
+
 ## 安装
 
 ### swagger-editor
