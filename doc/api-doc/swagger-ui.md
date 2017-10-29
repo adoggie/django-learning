@@ -16,20 +16,24 @@ swigger的api套件：
 ### swagger-editor
 
   node -v   > 6.2 
-  
+
+```
   mkdir /home/swagger ; cd /home/swagger
   git clone https://github.com/swagger-api/swagger-editor.git
   npm install -g http-server 
   http-server ./swagger-editor -p 9999   启动 editor侦听在 9999 端口
-  
+```
+
 ### swagger-ui 
-  
+
+```bash
   cd /home/swagger 
   git clone https://github.com/swagger-api/swagger-ui.git 
   mkdir node_app; cd node_app
   npm init 
   cp ../swagger-ui/dist ./
   npm install express --save
+```  
   
 vim index.js 
 
