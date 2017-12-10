@@ -11,6 +11,25 @@
 serializer(data={})  用于数据提交验证并得到运行数据对象
 serializer(instance,data={}) 用于输入数据更新instance的操作
 
+class User:
+  def __init__(self):
+    self.name = 
+    self.age = 
+    self.address = 
+
+class UserSerializer(serializers.Serializer):
+  name = serializers.CharField(max_length=10)
+  age = serializers.IntegerField()  
+
+data={'name':'scott','age':20}
+serializer = UserSerializer(data)    
+serializer.is_valid()  验证用户提交数据
+serializer.save() 创建实例 , 重载 .create() 函数
+
+user = User()
+users=queryset
+serializer = UserSerializer( user,data)  验证用户提交数据并应用于user对象更新操作 , 重载 .update() 函数
+serializer = UserSerializer( users,many=True)  根据User类实例创建序列化对象
 
 JSONRender.render( serializer.data) 生成json数据
 ```
@@ -18,8 +37,23 @@ JSONRender.render( serializer.data) 生成json数据
 ## 定义Serializer类
 
 ```
+class ProfileSerializer(serializers.Serilizer):
+  famliy = serializers.CharField()
+  
 class UserSerializer(serializers.Serilizer):
-  name = serializers.CharField(max_length=20)  
+  name = serializers.CharField(max_length=20,required=False,validators=[])  
+  profile = ProfileSerializer()  嵌套
+```
+
+## ModelSerializer 
+
+```python
+class UserSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = User
+    fields = ('name','age') 
+    fields = '__all__' 
+    
 ```
 
 ## 数据验证 validation
@@ -36,6 +70,28 @@ def validate_title(self,value):
   return value+'_sam'  可以修改数据值
 ```
 
+#### 对象级验证 object-level validation 
+定义函数`validate(self,data)`完成数据验证, 返回验证值或者异常`ValidationError`
+
+```python
+class EventSerializer(serializers.Serializer):
+  def validate(self,data):
+    ...
+    if data.has_key('data') is False:
+      return serializers.ValidationError('error message')
+    return data    
+```
+
+#### 验证器 validator 
+定义Serializer字段时可以添加数据验证器对象
+```python
+def my_validator(value):
+  if error: raise serializers.ValidationError('error')
+  return value
+class EventSerializer():
+  name = serializers.CharField(validators=[my_validator,])
+```
+##
 
 ## 常用方法和属性
 
@@ -44,11 +100,15 @@ def validate_title(self,value):
 	.validated_data - Returns the validated incoming data.
 	.errors - Returns any errors during validation.
 	.save() - Persists the validated data into an object instance.
+	
+	.intial_data 返回构造函数传入的参数data
+	.instance  返回构造函数传入的 instance (一般用于数据更新 partial_update) 
+	
 
 overrides:
 	.to_representation() - Override this to support serialization, for read operations.
 	.to_internal_value() - Override this to support deserialization, for write operations.
-	.create() and .update() - Override either or both of these to support saving instances.
+	.create(validated_data) and .update(instance,validated_data) - Override either or both of these to support saving instances.
 
 
 	to_representation : 格式化 对象的输出
