@@ -27,7 +27,7 @@ serializer.is_valid()  验证用户提交数据
 serializer.save() 创建实例 , 重载 .create() 函数
 
 user = User()
-users=queryset
+users=User.objects.all()
 serializer = UserSerializer( user,data)  验证用户提交数据并应用于user对象更新操作 , 重载 .update() 函数
 serializer = UserSerializer( users,many=True)  根据User类实例创建序列化对象
 
@@ -44,16 +44,23 @@ class UserSerializer(serializers.Serilizer):
   name = serializers.CharField(max_length=20,required=False,validators=[])  
   profile = ProfileSerializer()  嵌套
 ```
+## ListSerializer 多对象序列化
+支持用户提交多个数据对象创建验证序列化对象
+
+
 
 ## ModelSerializer 
 
 ```python
 class UserSerializer(serializers.ModelSerializer):
   class Meta:
-    model = User
-    fields = ('name','age') 
+    model = User   指定 Model 类
+    fields = ('name','age') 
     fields = '__all__' 
-    
+    exclude = ('address',)
+    read_only_fields = ('name',) 只读字段
+    extra_kwargs = { 'password':{'write_only':True} }  添加额外的字段 'password' 而无需定义字段
+    
 ```
 
 ## 数据验证 validation
@@ -106,8 +113,8 @@ class EventSerializer():
 	
 
 overrides:
-	.to_representation() - Override this to support serialization, for read operations.
-	.to_internal_value() - Override this to support deserialization, for write operations.
+	.to_representation(self,obj) - Override this to support serialization, for read operations.
+	.to_internal_value(self,data) - Override this to support deserialization, for write operations.
 	.create(validated_data) and .update(instance,validated_data) - Override either or both of these to support saving instances.
 
 
@@ -119,4 +126,19 @@ overrides:
 	当 .is_valid() 方法被调用时，drf 扫描所有 writable 字段的数据完整性( read_only_fields 就排除在外了) , 先使用Model的字段validator，
 	再挨个检查 validate_xxx()方法是否定义。
 	** 如果字段加入 read_only_fields之后，将不会调用 .validate_xxx()
+
+## 第三方包 Third party packages
+
+**Dynamic REST** 
+
+`dynamic-rest` 扩展了 ModelSerializer and ModelViewSet , 添加查询参数控制 (filtering,sorting, include,exclude ) 
+
+[https://github.com/AltSchool/dynamic-rest](https://github.com/AltSchool/dynamic-rest)
+
+
+
+
+
+
+
 
