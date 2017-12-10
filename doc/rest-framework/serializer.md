@@ -27,7 +27,14 @@ class UserSerializer(serializers.Serilizer):
 `.is_valid(False)`验证输入数据是否符合规则，如果默认将抛出异常, `.error`属性可以获得错误说明。
 
 #### 字段验证 field-level validation 
+对某一个字段进行验证可以定义方法 `.validate_<field_name>(self,value)` ,  返回正确值 `value`或者抛出异常 `serializers.ValidationError`
 
+```python
+def validate_title(self,value):
+  if 'sam' is not value:
+    raise ValidationError('any error message')
+  return value+'_sam'  可以修改数据值
+```
 
 
 ## 常用方法和属性
