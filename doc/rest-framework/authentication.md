@@ -37,17 +37,20 @@ request.auth  为None
 
 ### TokenAuthentication
 ```
-这种认证方式是，为当前存在的用户User创建一个token，并保存在数据库中，以后用户登陆就使用此token作为凭证。
+这种认证方式是，为当前存在的用户User创建一个token，并保存在数据库中，以后用户登陆就使用此token作为凭证
 
 生成token、发布token和管理token是个问题 。
 
 令牌认证方式，每一次webapi请求都会携带一个认证token
-使用时必须加入 'rest_framework.authtoken' 到 INSTALLED_APPS 列表 ，并且需要同步数据库，其将创建用户user相关的token表
+使用时必须加入 'rest_framework.authtoken' 到 INSTALLED_APPS 列表 ，并且需要同步数据库，其将创建用户user相关的token表 `authtoken_token`(存放所有用户的token)
 
+Postman测试 
+客户端请求传递head值：
 "Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b"
 
 request.user user
-request.auth  rest_framework.authtoken.models.Token
+request.auth  携带的token值
+
 
 ```
 **设置用户添加时自动生成Token**
@@ -79,7 +82,8 @@ for user in User.objects.all():
 
 ```python
 class ExampleView(APIView):
-    authentication_classes = (SessionAuthentication, BasicAuthentication)
+    authentication_classes = (SessionAuthentication, BasicAuthentication,TokenAuthentication) 满足任何一个即可通过认证（ 查看 request.user, request.auth) 
+    认证失败返回 401 错误
 ```
 此view被请求前进行 SessionAuthentication认证，如果把失败则进行用户名＋口令方式认证
 
