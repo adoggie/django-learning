@@ -88,3 +88,20 @@ checker.has_perm('main.change_post', post)  检查 当前用户是否具有修�
 
 ```
 
+## 访问权限控制
+两种方式可以控制对View的访问： 
+
+1. 配置文件
+
+```
+REST_FRAMEWORK = {
+   'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',)
+}
+指定所有的请求必须通过认证，否则返回  401 未认证错误
+```
+
+2. 单个视图View中指定 `permission_classes = (IsAuthenticated,)`
+
+
+
+
