@@ -38,6 +38,7 @@ vuejs 实现对组件进行封装，包括内部属性和控制方法，数据�
         <span>selected: [[ selected ]]</span>
     </div>
 
+<script type="text/javascript">
     var vm = new Vue({
         delimiters: ['[[', ']]'],
         el: '#block',
@@ -58,6 +59,7 @@ vuejs 实现对组件进行封装，包括内部属性和控制方法，数据�
                 }
             }
         }
-
     });
+</script>
+
 ```
