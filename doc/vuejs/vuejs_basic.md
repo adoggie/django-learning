@@ -15,18 +15,26 @@ var s1 = new Vue({
   computed:{
     totalValue:function(){
     }
-  }
+  },
+  filters:{
+    upper:function(value){
+      return value.toUpper();
+    }
+ }
 })
 ```
 
 
-**v-model**  绑定变量
+### v-model
+绑定变量
 
-**v-bind:attr**  绑定属性值,
+### v-bind:attr
+绑定属性值,
 ```html
   <p v-bind:title="value"/>  vue会生成 <p title="abc"/> 
 ```
-**ref  变量引用** 在Vue()代码中引用到Template中的标签对象 
+### ref  
+变量引用, 在Vue()代码中引用到Template中的标签对象 
 
 ```javascript
 <input type="text" ref="username" />   username表示被引用的变量名
@@ -38,3 +46,19 @@ var s1 = new Vue({
      }
    }  
 ```
+
+### filter 
+```javascript
+{{ message | upper}}
+
+new Vue({
+  filters:{
+    upper:function(value){
+      return value.toUpper();
+    }
+  }
+})
+``` 
+ 
+
+
