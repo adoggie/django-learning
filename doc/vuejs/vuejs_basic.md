@@ -20,6 +20,11 @@ var s1 = new Vue({
     upper:function(value){
       return value.toUpper();
     }
+ },
+ components:{
+  'my-component':{ // 部件
+    template: '<div> somethings..</div>'
+  }
  }
 })
 ```
