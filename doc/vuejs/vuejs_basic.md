@@ -85,13 +85,15 @@ computed:{
 ## 单文件组件 single file component
 组件构建在 .vue文件中 , 基本内容：
 ```html
-<template> ... </template>
+<template lang="jade" > ... </template>
 <script>
+  import comp from '../Other.vue'
   export default {
     data(){
       return {...}
     },
-    methods:{
+    components:{
+      comp
     }
   }
 </script>
@@ -100,7 +102,9 @@ computed:{
   p { ... }
 </style>
 
-  
+//同样可以写到外部
+<script src="./my-component.js"></script>
+<style src="./my-component.css"></style>  
 ```
 
 
