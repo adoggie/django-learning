@@ -48,6 +48,8 @@ var s1 = new Vue({
 ```
 
 ### filter 
+过滤器函数, 使用管道作为输入和输出
+
 ```javascript
 {{ message | upper}}
 
