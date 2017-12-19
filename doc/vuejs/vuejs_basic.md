@@ -32,6 +32,7 @@ var s1 = new Vue({
 绑定属性值,
 ```html
   <p v-bind:title="value"/>  vue会生成 <p title="abc"/> 
+  <a v-bind:href="url">...</a>
 ```
 ### ref  
 变量引用, 在Vue()代码中引用到Template中的标签对象 
@@ -70,6 +71,38 @@ new Vue({
   }
 })
 ``` 
- 
+### computed 计算属性
+ 可以定义 `get`,`set` ,默认是`get`
+```js
+computed:{
+  fullName: {
+    get: function(){return ...},
+    set: function(value) {  .. }
+  }
+}
+```
+
+## 单文件组件 single file component
+组件构建在 .vue文件中 , 基本内容：
+```html
+<template> ... </template>
+<script>
+  export default {
+    data(){
+      return {...}
+    },
+    methods:{
+    }
+  }
+</script>
+
+<style>
+  p { ... }
+</style>
+
+  
+```
+
+
 
 
