@@ -46,6 +46,15 @@ var s1 = new Vue({
      }
    }  
 ```
+### v-html 
+输出原始Html
+定义一段html代码 ` message = <H1>waoooo</H1> `
+
+```
+<span>{{ message }} </span>  直接输出未脱异的文本 
+<span v-html="message"></span>  输出render的结果 ,就是H1的文字效果
+
+```
 
 ### filter 
 过滤器函数, 使用管道作为输入和输出
