@@ -43,9 +43,9 @@ class ListModelMixin(object):
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)   # serializer已完成Render，并将数据交付给Paginator，最终 由Paginator返回Response
+            return self.get_paginated_response(serializer.data)   # serializer已完data输出，并将数据交付给Paginator，最终 由Paginator返回Response
 	    
-        serializer = self.get_serializer(queryset, many=True) # 这里采用serializer处理Render
-        return Response(serializer.data)
+        serializer = self.get_serializer(queryset, many=True) # 这里采用serializer处理data
+        return Response(serializer.data)  # Response() 内部调用对应的Render进行最终的数据输出
 	
 """
