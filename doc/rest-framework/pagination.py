@@ -18,13 +18,9 @@ DEFAULT_PAGINATION_CLASS  >>  'rest_framework.pagination.PageNumberPagination'.
 指定分页类
 pagination_class = LargeResultsSetPagination
 
-
 1. PageNumberPagination
 2. LimitOffsetPagination
 3. CursorPagination
-
-
-
 
 #手动控制分页
 	page = PageNumberPagination()
@@ -38,4 +34,18 @@ pagination_class = LargeResultsSetPagination
     page:{ page_num,page_size,count},
     result:[ .. ]
   }
+  
+对于ListView的数据返回处理时，如果定义了Paginator 则由Paginator生成Response返回到前端 ，如果未定义，则由Serializer对象进行Render出数据返回到前端
+
+class ListModelMixin(object):
+    def list(self, request, *args, **kwargs):
+    	...
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)   # serializer已完成Render，并将数据交付给Paginator，最终 由Paginator返回Response
+	    
+        serializer = self.get_serializer(queryset, many=True) # 这里采用serializer处理Render
+        return Response(serializer.data)
+	
 """
