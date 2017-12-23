@@ -3,7 +3,7 @@
 朋友的游戏项目后台对接apple的消息推送，采用python相关开发组件实现，期间碰到python版本ssl不适配的问题。 
 
 **系统环境**
-```
+```bash
 centos 7.4 
 python 2.7.5 
 django 1.6.8 
@@ -22,7 +22,7 @@ pymongo
 ```
 
 对接apple推送相关python包
-```
+```bash
 hyper 
 apns2   (easy_install apns2)  https://github.com/Pr0Ger/PyAPNs2 
 ```
@@ -33,12 +33,12 @@ apns2   (easy_install apns2)  https://github.com/Pr0Ger/PyAPNs2
 ### 步骤： 
 
 #### 0.前置条件 
-```
+```bash
 确保 zlib-devel , openssl-devel, python-devel 已经安装
 ```
 
 #### 1. 安装 virtualenv
-```sh
+```bash
 pip install virtualenv
 ```
 #### 2. 编译 python2.7.14 
@@ -57,7 +57,7 @@ tar xvzf Python-2.7.14.tgz ; cd Python-2.7.14
 某些场景编译时会出现不包含 _ssl 模块的情况,那就需要手动修改相关文件。
 在 `.configure`之后，修改配置文件`Setup` ,然后再进行 `make ; make install `
 
-```
+```bash
 vim /home/source/Python-2.7.14/Modules/Setup
 
 取消以下几行注释：
@@ -75,7 +75,7 @@ _ssl _ssl.c \
 
 #### 3. 生成虚拟环境
 
-```sh
+```bash
 mkdir /home/py2714; 
 virtualenv -p /usr/local/bin/python /home/py2714 
 
@@ -84,7 +84,7 @@ virtualenv -p /usr/local/bin/python /home/py2714
 #### 4. 测试virtualenv 
 
 进入虚拟环境安装相关程序包
-```
+```bash
 source /home/py2714/bin/activate
 pip install hyper 
 easy_install apns2
