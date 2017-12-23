@@ -8,13 +8,14 @@ source /home/scott/py2.7/bin/active
 
 python 安装相关包 
 ----
+```
 celery
 xpinyin
 qpid-tools
 qpid-python
 pykafka
 gevent
-
+```
 
 初始化表 
 ------
