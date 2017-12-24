@@ -15,7 +15,7 @@ psycogreen
 redis
 PyYAML
 python-dateutil
-django-cors-headers
+django-cors-headers==1.1  # django1.6.8适配版本
 djangorestframework==3.1.2
 IMAGE
 pymongo
