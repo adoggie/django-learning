@@ -6,3 +6,7 @@ http://fa2png.io/r/font-awesome/
 
 #### 转换并下载图标
 https://www.flaticon.com/free-icon/book_25303
+
+https://www.flaticon.com/free-icons/server_20068
+
+https://www.iconfinder.com/search/?q=server
