@@ -1,5 +1,5 @@
 
-		
+        
 from random import randint
 
 # Generates a number from 1 through 10 inclusive
@@ -22,10 +22,10 @@ else:
 
 # Add your for loop
 for char in phrase:
-	if char == "A" or char == "a":
-		print 'X', 
-	else:
-		print char, 
+    if char == "A" or char == "a":
+        print 'X', 
+    else:
+        print char, 
 
 
 #Don't delete this print statement!
@@ -50,16 +50,16 @@ else:
   
   
 def digit_sum(n):
-	mc = 0 
-	s = str(n)
-	# 1234 => "1234"
-	for c in s:
-		mc += int(c)
-	return mc 
-	
-	
-	
-	
+    mc = 0 
+    s = str(n)
+    # 1234 => "1234"
+    for c in s:
+        mc += int(c)
+    return mc 
+    
+    
+    
+    
 def is_prime(x):
     if x < 2:
         return False
@@ -71,14 +71,14 @@ def is_prime(x):
 
 def reverse(text):
   # text - 'zyc'
-	mc = ''
-	size = len(text)
-	while size > 0 : 
-		mc= mc + text[size-1]
-		size -= 1 
-	return mc 
-	
-	
+    mc = ''
+    size = len(text)
+    while size > 0 : 
+        mc= mc + text[size-1]
+        size -= 1 
+    return mc 
+    
+    
 def anti_vowel(text):
     t=""
     for c in text:
@@ -89,7 +89,7 @@ def anti_vowel(text):
                 c=c
         t=t+c
     return t
-	
+    
 score = {"a": 1, "c": 3, "b": 3, "e": 1, "d": 2, "g": 2, 
          "f": 4, "i": 1, "h": 4, "k": 5, "j": 8, "m": 3, 
          "l": 1, "o": 1, "n": 1, "q": 10, "p": 3, "s": 1, 
@@ -117,7 +117,7 @@ def censor(text, word):
     result =' '.join(words)
 
     return result
-	
+    
 def remove_duplicates(inputlist):
     if inputlist == []:
         return []
@@ -153,19 +153,19 @@ print median([2, 4, 5, 9])
 grades = [100, 100, 90, 40, 80, 100, 85, 70, 90, 65, 90, 85, 50.5]
 
 def grades_sum(scores):
-	basket = 0
-	for mc in scores:
-		basket += mc
-	return basket
+    basket = 0
+    for mc in scores:
+        basket += mc
+    return basket
 
 print grades_sum(grades)
 
 def grades_average(grades_input):
-	average = 0
-	sum = grades_sum(grades_input)
-	average = sum / (len(grades_input)*1.0)
-	return average
+    average = 0
+    sum = grades_sum(grades_input)
+    average = sum / (len(grades_input)*1.0)
+    return average
 
 print grades_average(grades)	
-	
-	
+    
+    
