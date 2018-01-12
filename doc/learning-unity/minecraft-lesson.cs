@@ -6,3 +6,11 @@ angularVelocity ＝ （0,0,0)  停止旋转
 向前向后移动 
 GetComponent<RigidBody>().velocity = new Vector3(0,0,20)
 velocity = (0,0,0)  停止
+
+loot - 
+harvest - 
+
+void OnMouseDown() 
+void Update()
+void Start()
+
