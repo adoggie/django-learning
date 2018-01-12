@@ -9,8 +9,15 @@ velocity = (0,0,0)  停止
 
 loot - 
 harvest - 
+puff 
 
 void OnMouseDown() 
 void Update()
 void Start()
 
+实现steve 近身点击block消除的功能： 
+  1. 摄像机添加 Collider, block上添加碰撞检测代码，在 OnTriggerEnter() 检测Camera碰撞允许点击Destroy
+
+Partical 粒子显示block消失时的爆裂特效（puff）
+
+  
