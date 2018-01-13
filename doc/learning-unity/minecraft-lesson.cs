@@ -20,4 +20,6 @@ void Start()
 
 Partical 粒子显示block消失时的爆裂特效（puff）
 
-  
+Constant Force 常数力
+- Force 常数恒力，不变的力
+- Relative Force  在 Update()使用，连续的施加力
