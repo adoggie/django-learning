@@ -1,3 +1,6 @@
+参考：
+https://gobyexample.com
+
 
 变量定义
 var a int = 100 显示声明类型
