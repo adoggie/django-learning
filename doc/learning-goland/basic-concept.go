@@ -65,6 +65,11 @@ func (pig Piggie)CallFunc() int{
   // pig 代表 Piggie实例对象，同java/c++的this
 }
 
+接口查询 
+
+if file5,ok := file1.(two.IStream);ok {
+...
+}
                    
                    
                    
