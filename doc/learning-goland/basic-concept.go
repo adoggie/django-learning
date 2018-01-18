@@ -11,6 +11,21 @@ for init;loop;post{   注意: { 必须同 for 在一行
 }
 
 
+字典map
+// 查找键值是否存在
+if v, ok := m1["a"]; ok {
+	fmt.Println(v)
+} else {
+	fmt.Println("Key Not Found")
+}
+
+// 遍历map
+for k, v := range m1 {
+	fmt.Println(k, v)
+}
+
+                   
+                   
 import (
   _ "fmt"   
 )
@@ -26,6 +41,11 @@ func setBack( action (event string) int){
 
 &变量地址 ，例如： &x ， 但无法获得函数地址 ，例如: &cook 报错
 
+对象创建 
+                   p1:= Number{}  生成对象
+                   p2:= new(Number) 返回对象指针
+                   但访问内部变量均使用 '.' , p1.value,p2.value 
+                   
 type 使用
                    定义结构:   type xxx struct {}
                    重命名 :   type namestr string  
