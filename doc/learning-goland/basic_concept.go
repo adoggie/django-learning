@@ -22,3 +22,26 @@ func setBack( action (event string) int){
 }
 
 &变量地址 ，例如： &x ， 但无法获得函数地址 ，例如: &cook 报错
+
+                   
+                   
+类对象/数据对象/接口定义 
+struct ／interface 
+
+type Piggie struct{
+   ...
+  CallFunc() int
+}
+                   
+对象成员函数定义
+func (pig *Piggie)CallFunc() int{
+  // pig 代表 Piggie实例对象，同java/c++的this
+}
+
+                   
+                   
+                   
+                   
+                   
+                   
+                   
