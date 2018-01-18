@@ -23,7 +23,11 @@ func setBack( action (event string) int){
 
 &变量地址 ，例如： &x ， 但无法获得函数地址 ，例如: &cook 报错
 
-                   
+type 使用
+                   定义结构:   type xxx struct {}
+                   重命名 :   type namestr string  
+                   为新类型增加方法: 
+                   func (name namestr) len() int {}  定义 len()成员函数
                    
 类对象/数据对象/接口定义 
 struct ／interface 
@@ -34,7 +38,7 @@ type Piggie struct{
 }
                    
 对象成员函数定义
-func (pig *Piggie)CallFunc() int{
+func (pig Piggie)CallFunc() int{
   // pig 代表 Piggie实例对象，同java/c++的this
 }
 
