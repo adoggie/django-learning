@@ -71,7 +71,11 @@ if file5,ok := file1.(two.IStream);ok {
 ...
 }
                    
-                   
+`反引号的使用`
+
+type Net struct {
+  ip string `IP` #表示Tag，在其他模块中产生对其的绑定关系
+}
                    
                    
                    
