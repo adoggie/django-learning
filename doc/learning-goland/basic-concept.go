@@ -76,8 +76,13 @@ if file5,ok := file1.(two.IStream);ok {
 type Net struct {
   ip string `IP` #表示Tag，在其他模块中产生对其的绑定关系
 }
-                   
-                   
-                   
-                   
+		   
+type S struct {
+	F string `species:"gopher" color:"blue"`
+}
+
+s := S{}
+st := reflect.TypeOf(s)
+field := st.Field(0)
+fmt.Println(field.Tag.Get("color"), field.Tag.Get("species"))
                    
