@@ -166,3 +166,16 @@ xargs -I {} cat {}
 
 rysnc 拷贝排外
 rsync -av --progress ./backends/ /Users/scott/github/rhinoceros/code/backends/ --exclude '.svn' --exclude '.idea' --exclude '*.pyc'
+
+
+启动http－server的方法
+-----------
+python -m SimpleHTTPServer 
+nodejs:  http-server -a xxxx -p 8888 
+apache httpd 
+nginx
+go:  httpserver
+mongoose 
+
+
+
