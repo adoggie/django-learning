@@ -17,6 +17,10 @@ service loading:
 启动wordpress
 
 mysql-server:
-```
+
 docker run --name eric-wp-mysql -e MYSQL_ROOT_PASSWORD=eric1231 -e MYSQL_DATABASE=ericwp -v /home/eric/wordpress/data:/var/lib/mysql -p 53306:3306 -d docker.io/mysql:latest
-```
+
+＊启动jupyter notebook＊
+
+python-lesson-eric/jupyter-notebook.md
+
