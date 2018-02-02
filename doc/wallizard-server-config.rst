@@ -13,3 +13,7 @@ service loading:
      
   5. shellinaboxd 
      sudo shellinaboxd -b  -s /:SSH -c /var/lib/shellinabox -u shellinabox
+
+启动wordpress
+mysql-server:
+docker run --name eric-wp-mysql -e MYSQL_ROOT_PASSWORD=eric1231 -e MYSQL_DATABASE=ericwp -v /home/eric/wordpress/data:/var/lib/mysql -p 53306:3306 -d docker.io/mysql:latest
