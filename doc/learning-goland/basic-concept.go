@@ -45,12 +45,12 @@ func setBack( action (event string) int){
 	p1:= Number{}  生成对象
 	p2:= new(Number) 返回对象指针
 	但访问内部变量均使用 '.' , p1.value,p2.value 
-									 对象到接口的转换必须采用 & 
-									 type W interface{ Write(name string)}
-									 type File struct{}
-									 funct( c* File) Write(name string){}
-									 
-									 var w W = &File{}  类File到接口W的转换必须采用地址指针& 
+	
+  对象到接口的转换必须采用 & 
+	type W interface{ Write(name string)}
+  type File struct{}
+  funct( c* File) Write(name string){}								 
+  var w W = &File{}  类File到接口W的转换必须采用地址指针& 
 	
                    
 type 使用
