@@ -150,6 +150,10 @@ google python-fire :  pip install fire    函数与shell的集成
 zeep - soap wsdl 服务 
 polygon - 多边形库绘制和计算   https://www.j-raedler.de/projects/polygon/
 
+fire - google command api tools
+OpenMPI - 并行计算
+cython - python 扩展包
+
 微服务
 --------
 connexion    - "https://pypi.python.org/pypi/connexion  基于配置的微型service app， 基本实现功能在djangoframework中都覆盖了。 "
