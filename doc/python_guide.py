@@ -113,7 +113,8 @@ pyqt   https://github.com/adoggie/vlc_player/blob/master/video_player.pyw
 gevent
 django
 numpy
-scrapy
+scrapy http web爬虫框架
+scapy 网络协议解析包
 py4j - 实现python与java之间互相调用 
 pyjnius - python调用java类，据说优于py4j，目前没感觉到！
 chardet - 字符集检测  
