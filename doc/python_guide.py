@@ -158,4 +158,8 @@ cython - python 扩展包
 微服务
 --------
 connexion    - "https://pypi.python.org/pypi/connexion  基于配置的微型service app， 基本实现功能在djangoframework中都覆盖了。 "
+
+ 相当多的优秀第三方扩展 库    https://github.com/vinta/awesome-python
+    
+    
   
