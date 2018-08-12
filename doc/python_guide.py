@@ -155,6 +155,9 @@ fire - google command api tools
 OpenMPI - 并行计算
 cython - python 扩展包
 
+pymunk 物理游戏引擎包   http://www.pymunk.org/  可以运行在jupyter notebook
+  
+
 微服务
 --------
 connexion    - "https://pypi.python.org/pypi/connexion  基于配置的微型service app， 基本实现功能在djangoframework中都覆盖了。 "
