@@ -1,0 +1,109 @@
+
+
+导入image
+docker import rhino_0.2.docker rhino:0.2 
+修改 image name 
+docker tage old:tag new:tag
+
+cd rhino_0.2.3/rhino/docker
+bash docker_db_start.sh
+bash docker_redis_qpid_start.sh 
+bash docker_service_start.sh 
+
+docker exec -it rhino_db /bin/bash
+bash /opt/scripts/start_pgsql.sh
+bash /opt/scripts/start_redis.sh
+bash /opt/scripts/start_qpid.sh
+
+cat /usr/share/zoneinfo/Asia/Shanghai > /etc/localtime
+
+--------------------------------
+docker exec -it rhino_service /bin/bash
+vim /etc/hosts
+172.17.0.1  ytodev2
+yum install py-dateutil PyYAML
+
+export PYTHONPATH=/opt/libs
+cd /opt/services/DataAggregator/src
+python create_day_table.py 100
+
+bash /opt/services/start-adapter.sh
+
+docker exec -it rhino_service /bin/bash /opt/services/start-adapter.sh front
+
+
+locuserservice: 15001 tracer: 15003 teresa: 15002/5555
+
+curl -X GET 'http://localhost:15001/rhino/auth/tickets?app_id=teresa&secret_key=57a6a0811829faf34a78ca625c383ec9&user_id=admin&user_roles=root'
+
+
+-- Teresa -- 
+
+docker exec -it rhino_service /bin/bash
+cd /opt/services/Teresa/src
+pip install flask-cas flask-compass flask-gzip
+export PYTHONPATH=`pwd`/../lib
+
+vim etc/settings.yaml
+rhino_server:
+    url: 'http://180.153.223.51:20002/'   暴露到公网的地址和端口
+    auth_url: 'http://172.17.0.1:15001/rhino/auth/tickets'  teresa访问本地docker容器的地址
+    
+    
+python server.py 
+
+ --- End Teresa -- 
+
+ -- Nginx -- 
+ server {
+        listen       8081 default_server;
+        server_name  _;
+        #root         /usr/share/nginx/html;
+        #root          /home/file;
+        autoindex    on;
+
+        # Load configuration files for the default server block.
+        include /etc/nginx/default.d/*.conf;
+
+ #       location / {
+            #root /home/bdvmp/file;
+            #autoindex on;
+ #       }
+
+
+
+# --- vip very important , don't remove following configs --
+
+    gzip on;
+    gzip_min_length 1k;
+    gzip_buffers 16 64k;
+    gzip_vary on;
+    gzip_types text/plain application/json;
+
+    location /rhino/{
+                    proxy_redirect off;
+                    proxy_set_header Host $host;
+                    proxy_set_header X-Real-IP $remote_addr;
+                    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                    proxy_pass http://127.0.0.1:15003/rhino/;
+    }
+
+    location /rhino/auth/{
+                        proxy_redirect off;
+                        proxy_set_header Host $host;
+                        proxy_set_header X-Real-IP $remote_addr;
+                        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                        proxy_pass http://127.0.0.1:15001/rhino/auth/;
+        }
+    location /{
+                        proxy_redirect off;
+                        proxy_set_header Host $host;
+                        proxy_set_header X-Real-IP $remote_addr;
+                        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                        proxy_pass http://127.0.0.1:15002/;
+        }
+        error_page 404 /404.html;
+            location = /40x.html {
+        }
+}
+ 
