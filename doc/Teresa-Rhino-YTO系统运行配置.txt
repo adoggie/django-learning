@@ -1,79 +1,87 @@
 
 
+访问demo地址
+http://180.153.223.51:20002/teresa/index
+
+
 导入image
 docker import rhino_0.2.docker rhino:0.2 
 修改 image name 
 docker tage old:tag new:tag
 
+启动容器
 cd rhino_0.2.3/rhino/docker
 bash docker_db_start.sh
 bash docker_redis_qpid_start.sh 
 bash docker_service_start.sh 
 
+启动 redis,qpid,pgsql 服务  
+端口: 26379,25432,
 docker exec -it rhino_db /bin/bash
 bash /opt/scripts/start_pgsql.sh
 bash /opt/scripts/start_redis.sh
 bash /opt/scripts/start_qpid.sh
 
+每个容器修改市区 +8
 cat /usr/share/zoneinfo/Asia/Shanghai > /etc/localtime
 
 --------------------------------
+启动 服务程序 容器
 docker exec -it rhino_service /bin/bash
+进入容器修改主机ip
 vim /etc/hosts
 172.17.0.1  ytodev2
+安装必要的pip包
 yum install py-dateutil PyYAML
 
+导出python运行库路径，创建n天的历史记录表
 export PYTHONPATH=/opt/libs
 cd /opt/services/DataAggregator/src
 python create_day_table.py 100
 
-bash /opt/services/start-adapter.sh
-
+启动各个服务器
 docker exec -it rhino_service /bin/bash /opt/services/start-adapter.sh front
 
+暴露的服务端口
+locuserservice: 15001 tracer: 15003 teresa: 15002
 
-locuserservice: 15001 tracer: 15003 teresa: 15002/5555
 
+进行一次管理员用户的登录，观察redis 中是否已有车辆
 curl -X GET 'http://localhost:15001/rhino/auth/tickets?app_id=teresa&secret_key=57a6a0811829faf34a78ca625c383ec9&user_id=admin&user_roles=root'
 
+主机配置： 4 核心 8G 内存 80G 硬盘
 
--- Teresa -- 
+
+-- 配置 Teresa -- 
 
 docker exec -it rhino_service /bin/bash
-cd /opt/services/Teresa/src
+
+安装必要的py库
 pip install flask-cas flask-compass flask-gzip
+cd /opt/services/Teresa/src
 export PYTHONPATH=`pwd`/../lib
 
+修改配置输出配置
 vim etc/settings.yaml
 rhino_server:
     url: 'http://180.153.223.51:20002/'   暴露到公网的地址和端口
     auth_url: 'http://172.17.0.1:15001/rhino/auth/tickets'  teresa访问本地docker容器的地址
     
-    
+运行teresa
 python server.py 
 
  --- End Teresa -- 
 
- -- Nginx -- 
+ -- Nginx 宿主机 配置  --
+ vim /etc/nginx/nginx.conf
+ 
  server {
         listen       8081 default_server;
         server_name  _;
-        #root         /usr/share/nginx/html;
-        #root          /home/file;
         autoindex    on;
 
         # Load configuration files for the default server block.
         include /etc/nginx/default.d/*.conf;
-
- #       location / {
-            #root /home/bdvmp/file;
-            #autoindex on;
- #       }
-
-
-
-# --- vip very important , don't remove following configs --
-
     gzip on;
     gzip_min_length 1k;
     gzip_buffers 16 64k;
