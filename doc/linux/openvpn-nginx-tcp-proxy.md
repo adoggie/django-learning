@@ -1,12 +1,12 @@
 
 
-#Openvpn实现 Tcp反向穿透 
+# Openvpn实现 Tcp反向穿透 
 
 >通过架设公网主机vpn建立隧道网络，实现公网两端主机通信连接
 
 ![avatar](../images/openvpn-nginx-proxy.jpg)
 
-主机一览
+ 主机一览
 --------
 
 >公网服务器 （S) ：  101.231.207.51
