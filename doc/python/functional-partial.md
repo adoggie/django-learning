@@ -8,6 +8,7 @@ def _collect(result, x, y):
 reduce(partial(_collect, gaps), entries)
 </pre>
 
+<pre>
 def big_small(big,small,compare,x):
   if x >=compare:
      big.append(x)
@@ -17,3 +18,5 @@ def big_small(big,small,compare,x):
 big=[]
 small=[]
 filter(partial(big_small,5),range(10))
+
+</pre>
