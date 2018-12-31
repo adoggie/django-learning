@@ -42,28 +42,22 @@ int main() {
 	TwoInt ti = std::make_tuple(1,2);
 	ti = {2,3};
 	std::cout<< std::get<0>(ti) <<std::endl;
-
 	std::cout<< std::hex << 42 << '\n';
-
-
 	std::vector<int> nums ={1,2,3};
 	std::vector<int> nums_2 ;
 
 	int result = std::accumulate(nums.begin(),nums.end(),100);
-
-
 	std::stringstream ss;
 	ss<<"0x" << std::hex << result << std::endl;
 
 	std::cout<< ss.str() ;
-
 	std::copy(nums.cbegin(),nums.cend(),std::back_inserter(nums_2));
 	std::for_each(nums_2.begin(),nums_2.end(),[](const  int & v){
 		std::cout<<std::hex<<v<<" ";
 	});
 
 	std::vector<int> nums_3 ;
-
+	//map ( transform ) , filter ( copy_if ) , reduce ( accumulate ) 
 	std::transform(nums.begin(),nums.end(),std::back_inserter(nums_3),[](const int & v){
 		return v+100;
 	});
