@@ -42,5 +42,13 @@ samyk/Awesome-Hacking-Resources
  
  paperjs/paper.js
  
+ hustcc/warpart
+ 
+ getredash/redash
+ 
+ ethanhs/pyhooked
+ 
+ 
+ 
  
  
