@@ -165,4 +165,8 @@ connexion    - "https://pypi.python.org/pypi/connexion  基于配置的微型ser
  相当多的优秀第三方扩展 库    https://github.com/vinta/awesome-python
     
     
+Python-Markdown 
+  pip install markdown Pygments
+  pygmentize -S default -f html > default.css
+  
   
