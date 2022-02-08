@@ -11,7 +11,7 @@ DOCKER_NETWORK_OPTIONS=--ip=58.34.214.162
 
 docker pull docker.io/mysql:5.7
 mkdir /mnt/Data/mysql-data
-docker run --name mysql-yy  -v /mnt/Data/mysql-data:/var/lib/mysql -p 13306:3306  -e MYSQL_ROOT_PASSWORD="yuyang$elabs.com"  -e TZ="Asia/Shanghai" -d docker.io/mysql:5.7 
+docker run --name mysql-yy  -v /mnt/Data/mysql-data:/var/lib/mysql -p 13306:3306  -e MYSQL_ROOT_PASSWORD="000$elabs.com"  -e TZ="Asia/Shanghai" -d docker.io/mysql:5.7 
 
 
 apt install procps vim 
