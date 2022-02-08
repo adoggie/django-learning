@@ -1,0 +1,35 @@
+
+
+Docker 安装mysql，允许远程访问
+
+
+10.60.10.34
+
+/etc/sysconfig/docker-network
+DOCKER_NETWORK_OPTIONS=--ip=58.34.214.162
+
+
+docker pull docker.io/mysql:5.7
+mkdir /mnt/Data/mysql-data
+docker run --name mysql-yy  -v /mnt/Data/mysql-data:/var/lib/mysql -p 13306:3306  -e MYSQL_ROOT_PASSWORD="yuyang$elabs.com"  -e TZ="Asia/Shanghai" -d docker.io/mysql:5.7 
+
+
+apt install procps vim 
+vim /etc/mysql/conf.d/docker.cnf
+[mysqld]
+Skip-grant-tables
+
+
+docker exec -it mysql-yy bash 
+mysql -u root 
+use mysql;
+alter user 'root'@'localhost' IDENTIFIED BY 'yuyang$elabs.com'；
+alter user 'root'@'%' IDENTIFIED BY 'yuyang$elabs.com'；
+flush privileges；
+
+
+grant all privileges on *.* to root@"%" with grant option;
+flush privileges;
+
+
+mysql -h 10.60.10.34 -P 13306 -uroot -p
