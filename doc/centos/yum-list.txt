@@ -1,0 +1,6 @@
+
+yum install epel-release jq tmux nload iftop telnet expect sshfs \
+   vim htop wget curl expect apache2-utils net-tools net-snmp subversion \
+   nginx nginx-full sshpass ansible nmon tree \
+   keepalived pigz docker mysql jq nc -y
+
