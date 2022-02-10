@@ -1,0 +1,130 @@
+
+
+Keepalived / ha / mysql 容灾测试 
+
+172.16.30.9/10/11/12
+
+keepalived/nginx :  172.16.30.11， 172.16.30.12 
+Virtual-ip :  172.16.30.29
+Mysql/nc: 172.16.30.9, 172.16.30.10
+
+
+yum install keepalived pigz -y
+vim /etc/keepalived/keepalived.conf
+
+tail /var/log/message 运行日志
+
+172.16.30.11
+
+global_defs {
+
+router_id el01
+}
+vrrp_instance VI_1 {
+state MASTER
+interface enp59s0f0
+virtual_router_id 51
+priority 100
+advert_int 1
+authentication {
+auth_type PASS
+auth_pass 1111
+}
+virtual_ipaddress {
+172.16.30.29
+}
+}
+
+
+172.16.30.12
+
+global_defs {
+router_id el01
+}
+vrrp_instance VI_1 {
+state BACKUP
+interface enp59s0f0
+virtual_router_id 51
+priority 50
+advert_int 1
+authentication {
+auth_type PASS
+auth_pass 1111
+}
+virtual_ipaddress {
+  172.16.30.29
+}
+}
+
+
+Nc
+172.16.30.9, 172.16.30.10
+nc -k -l 9010
+nc -k -l 9010
+
+
+
+
+
+Mysql 
+
+yum install docker mysql jq nc -y 
+
+vim /etc/sysconfig/docker-network
+DOCKER_NETWORK_OPTIONS=--ip=0.0.0.0
+
+docker pull docker.io/mysql:5.7
+mkdir /data/mysql-data
+docker run --name mysql  -v /data/mysql-data:/var/lib/mysql -p 3306:3306  -e MYSQL_ROOT_PASSWORD="elabs.com"  -e TZ="Asia/Shanghai" -d docker.io/mysql:5.7 
+
+docker exec -it mysql bash 
+
+apt update
+apt  install procps vim 
+
+vim /etc/mysql/conf.d/docker.cnf
+
+[mysqld]
+skip-grant-tables
+
+docker exec -it mysql-yy bash
+mysql -u root 
+use mysql;
+alter user 'root'@'localhost' IDENTIFIED BY 'elabs.com'；
+alter user 'root'@'%' IDENTIFIED BY 'elabs.com'；
+flush privileges；
+
+grant all privileges on *.* to root@"%" with grant option;
+flush privileges;
+
+mysql -h 10.60.10.34 -P 3306 -uroot -p
+
+
+nginx
+172.16.30.11， 172.16.30.12 
+
+yum install nginx-mod-stream -y
+
+stream{
+  upstream nc{
+    server 172.16.30.9:9001;
+    server 172.16.30.10:9001;
+}
+
+  server {
+    listen 9001;
+    proxy_pass nc;
+  }
+}
+
+
+Testing
+
+telnet 172.16.30.29 9001 
+
+
+
+
+
+
+
