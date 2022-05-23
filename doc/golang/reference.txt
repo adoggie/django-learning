@@ -1,0 +1,84 @@
+技术参考
+https://www.geeksforgeeks.org/time-formatting-in-golang/
+https://pkg.go.dev/time
+https://gobyexample.com/writing-files
+
+标准库
+https://pkg.go.dev/std
+
+交易所 golang 开发包
+https://github.com/adshao/go-binance
+
+golang简单教程
+https://tutorialedge.net/golang/go-maps-tutorial/
+
+web framework
+
+Echo 高性能，极简的Web框架
+https://github.com/labstack/echo 
+https://echo.labstack.com
+go get github.com/labstack/echo/v4
+
+使用： 
+https://echo.laily.net/
+https://www.tizi365.com/archives/28.html
+https://echo.laily.net/cookbook/crud/
+
+
+goczmq
+https://github.com/zeromq/goczmq
+https://godoc.org/github.com/zeromq/goczmq 
+brew install czmq
+go get gopkg.in/zeromq/goczmq.v4
+
+zmq 高级模式参考
+https://wizardforcel.gitbooks.io/zmq-guide/content/chapter5.html
+pgm 组播模式
+
+mongodb 
+https://pkg.go.dev/go.mongodb.org/mongo-driver/mongo
+https://github.com/mongodb/mongo-go-driver
+examples:
+https://github.com/mongodb/mongo-go-driver/blob/v1.9.1/examples/documentation_examples/examples.go#L971
+
+redis 
+https://redis.uptrace.dev/
+https://pkg.go.dev/github.com/go-redis/redis/v8#NewClient
+
+flag 
+https://zetcode.com/golang/flag/
+https://gobyexample.com/command-line-flags
+https://pkg.go.dev/flag
+
+log
+logrus
+https://github.com/sirupsen/logrus
+
+chrono
+https://pkg.go.dev/github.com/cactus/go-misc/chrono
+https://github.com/gochrono/chrono
+
+
+gui 库
+https://github.com/fyne-io/fyne
+
+pandas
+https://github.com/rocketlaunchr/dataframe-go
+https://github.com/kniren/gota
+https://www.gonum.org/
+https://github.com/go-gota/gota
+
+
+
+字符串。
+`{"jsonrpc":"2.0","id":1,"method":"rpc_modules"}` + "\n"
+
+interface 等同于指针转换
+conn, err := net.Dial("tcp", listener.Addr().String())
+conn.(*net.TCPConn).CloseWrite()
+
+时间
+deadline = time.Now().Add(10 * time.Second) 10s之后的时间
+
+
+
