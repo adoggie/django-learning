@@ -3,3 +3,14 @@ vim ~/.vimrc
 set ts=4
 set expandtab
 set autoindent
+
+
+常用配置
+
+set number
+set tabstop=4
+set showmatch
+syntax enable
+set expandtab
+set nocompatible
+
