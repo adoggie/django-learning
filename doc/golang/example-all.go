@@ -5,12 +5,16 @@ import (
 	"fmt"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"io"
 	"os"
 	"path/filepath"
 
 	"context"
+	"github.com/BurntSushi/toml"
+	nested "github.com/antonfisher/nested-logrus-formatter"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"github.com/sirupsen/logrus"
 	"github.com/zeromq/goczmq"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -208,4 +212,93 @@ func  TestTime(_ *testing.T) {
 	fmt.Printf("%d-%02d-%02dT%02d:%02d:%02d-00:00\n",
 		t.Year(), t.Month(), t.Day(),
 		t.Hour(), t.Minute(), t.Second())
+}
+
+func TestLog(t *testing.T) {
+	var log = logrus.New()
+	//log.Formatter = new(logrus.JSONFormatter)
+	log.Formatter = new(logrus.TextFormatter)                     //default
+	//log.Formatter.(*logrus.TextFormatter).DisableColors = true    // remove colors
+	//log.Formatter.(*logrus.TextFormatter).DisableTimestamp = true // remove timestamp from test output
+	log.Formatter= &nested.Formatter{
+		HideKeys:    true,
+		FieldsOrder: []string{"component", "category"},
+		TimestampFormat: time.RFC3339,
+	}
+	log.Level = logrus.TraceLevel
+	log.Out = os.Stdout
+	//log.SetReportCaller(true)
+
+	writer3, err := os.OpenFile("log.txt", os.O_WRONLY|os.O_CREATE, 0755)
+	if err != nil {
+		log.Fatalf("create file log.txt failed: %v", err)
+	}
+	log.SetOutput(io.MultiWriter(os.Stdout, writer3))
+
+	log.WithFields(logrus.Fields{
+		"animal": "walrus",
+		"number": 0,
+	}).Trace("Went to the beach")
+
+	log.WithFields(logrus.Fields{
+		"animal": "walrus",
+		"number": 8,
+	}).Debug("Started observing beach")
+
+	log.WithFields(logrus.Fields{
+		"animal": "walrus",
+		"size":   10,
+	}).Info("A group of walrus emerges from the ocean")
+
+	log.WithFields(logrus.Fields{
+		"omg":    true,
+		"number": 122,
+	}).Warn("The group's number increased tremendously!")
+
+	log.WithFields(logrus.Fields{
+		"temperature": -4,
+	}).Debug("Temperature changes")
+	log.Debug("Finished!")
+	//log.WithFields(logrus.Fields{
+	//	"animal": "orca",
+	//	"size":   9009,
+	//}).Panic("It's over 9000!")
+}
+
+
+func _TestToml(t *testing.T) {
+	d:=`[database]
+server = "192.168.1.1"
+ports = [ 8001, 8001, 8002 ]
+connection_max = 5000
+enabled = true`
+
+	type database struct{
+		Server string  `toml:"server"`
+		Ports []int
+		ConnMax int `toml:"connection_max"`
+		Enabled bool
+	}
+
+	type Config struct {
+		Age        int
+		Cats       []string
+		Pi         float64
+		Perfection []int
+		DOB        time.Time // requires `import time`
+	}
+
+	var dbcfg database
+	if e:=toml.Unmarshal( []byte(d) ,&dbcfg); e!=nil{
+		fmt.Println(e)
+		return
+	}
+	var config Config
+	xx,_:=os.ReadFile("a.toml")
+	if _,err := toml.Decode(string(xx),config);err==nil {
+		fmt.Println(config)
+	}else{
+		fmt.Println(err)
+	}
+	//fmt.Println("***",dbcfg.Server)
 }
