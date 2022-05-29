@@ -1,0 +1,4 @@
+
+ps 命令查看进程启动的精确时间和启动后所流逝的时间
+
+ps -eo pid,lstart,etime,cmd | grep nginx
