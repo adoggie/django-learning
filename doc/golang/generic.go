@@ -34,6 +34,7 @@ func ForEach[T any](s []T, fn func(*T)) {
 	}
 }
 
+
 func Reduce[From any, To any](s []From, init To, fn func(From, To) To) To {
 	acc := init
 	for _, v := range s {
