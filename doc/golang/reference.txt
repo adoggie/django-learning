@@ -68,6 +68,92 @@ https://github.com/kniren/gota
 https://www.gonum.org/
 https://github.com/go-gota/gota
 
+andas
+https://github.com/rocketlaunchr/dataframe-go
+https://github.com/kniren/gota
+https://www.gonum.org/
+https://github.com/go-gota/gota
+
+github.com/wcharczuk/go-chart
+github.com/rocketlaunchr/dataframe-go/plot
+github.com/rocketlaunchr/dataframe-go/plot/wcharczuk/go-chart
+统计包
+https://pkg.go.dev/github.com/montanaflynn/stats
+https://github.com/markcheno/go-talib
+
+https://github.com/gobacktest/gobacktest
+
+gonum 
+https://www.gonum.org/post/intro_to_gonum/
+https://godoc.org/gonum.org/v1/gonum/mat
+go get gonum.org/v1/gonum@latest
+go test gonum.org/v1/gonum
+
+machine-learning
+https://upstack.co/knowledge/golang-machine-learning
+https://github.com/sjwhitworth/golearn
+https://github.com/gorgonia/gorgonia
+https://github.com/MaxHalford/eaopt
+https://github.com/cdipaolo/goml
+https://github.com/tomcraven/goga
+https://github.com/surenderthakran/gomind 神经网络
+"github.com/sjwhitworth/golearn/
+"github.com/sjwhitworth/golearn/evaluation"
+"github.com/sjwhitworth/golearn/knn"
+
+https://code.google.com/archive/p/mlgo/
+https://gorgonia.org/
+https://github.com/cdipaolo/goml
+
+jupyter binding
+https://github.com/gopherdata/gophernotes
+https://github.com/gopherdata/gophernotes#mac
+
+plot 
+https://github.com/devstark-com/vue-google-charts
+
+chart 
+https://golangexample.com/go-echarts-the-adorable-charts-library-for-golang/
+https://github.com/chenjiandongx/go-echarts
+
+graphic
+https://github.com/sdboyer/gogl
+
+go-examples
+https://golangexample.com/
+
+Map/Filter/Reduce for Go Primitives
+go get github.com/bnert/mfr
+
+-----------------
+go get -u github.com/wcharczuk/go-chart
+go get -u github.com/rocketlaunchr/dataframe-go
+go get github.com/bnert/mfr
+
+https://pkg.go.dev/github.com/rocketlaunchr/dataframe-go
+
+https://pkg.go.dev/
+-----------------
+
+datetime 
+https://pkg.go.dev/cloud.google.com/go/civil
+rocketlaunchr/dataframe-go/utils/utime
+
+toml
+https://pkg.go.dev/github.com/BurntSushi/toml
+https://github.com/BurntSushi/toml
+% go install github.com/BurntSushi/toml/cmd/tomlv@latest
+% tomlv some-toml-file.toml
+
+websocket 
+https://github.com/gorilla/websocket/tree/master/examples/chat
+https://pkg.go.dev/github.com/gorilla/websocket
+
+
+goutils 工具函数包
+https://github.com/gookit/goutil
+https://pkg.go.dev/github.com/gookit/goutil
+
 
 
 字符串。
